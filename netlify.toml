@@ -1,0 +1,10 @@
+[build] 
+  publish = "." 
+[[redirects]] 
+  from = "/account" 
+  to = "/account.html" 
+  status = 200 
+[[redirects]] 
+  from = "/info" 
+  to = "/info.html" 
+  status = 200 
