@@ -77,39 +77,19 @@
     <!-- Unser Redirect-Script -->
     <script src="js/identity-redirect.js"></script>
     <!-- Funktionale Test-Skripts -->
-    <script src="js/identity-test.js"></script>
-
-    <!-- Test-Script (unverändert in der Logik) -->
+    <script src="/js/identity-test.js"></script>
     <script>
-        const TestFramework = {
-            results: { identity: [], dom: [], roles: [], functional: [] },
-            passed: 0, failed: 0, total: 0,
-            assert: function(condition, message, category) { /* ... unverändert ... */ },
-            updateUI: function() { /* ... unverändert ... */ },
-            runAllTests: function() { /* ... unverändert ... */ },
-            runFunctionalTests: function() { /* ... unverändert ... */ },
-            testIdentityWidget: function() { /* ... unverändert ... */ },
-            testDOMStructure: function() {
-                 // Leichte Anpassungen für neue Inhalte/Strukturen falls nötig
-                 this.assert(document.querySelector('nav'), 'Navigationsmenü ist vorhanden', 'dom');
-                 const hasIndexLink = !!document.querySelector('a[href="index.html"]');
-                 const hasInfoLink = !!document.querySelector('a[href="info.html"]');
-                 const hasAccountLink = !!document.querySelector('a[href="account.html"]');
-                 const hasTestLink = !!document.querySelector('a[href="test.html"]'); // Test hinzugefügt
-
-                 this.assert(hasIndexLink, 'Link zur Startseite vorhanden', 'dom');
-                 this.assert(hasInfoLink, 'Link zur Info-Seite vorhanden', 'dom');
-                 this.assert(hasAccountLink, 'Link zur Account-Seite vorhanden', 'dom');
-                 this.assert(hasTestLink, 'Link zur Test-Seite vorhanden', 'dom'); // Test hinzugefügt
-
-                 this.assert(document.querySelector('[data-netlify-identity-menu]'), 'Netlify Identity Widget Container vorhanden', 'dom');
-                 this.assert(document.querySelector('header'), 'Header vorhanden', 'dom');
-                 this.assert(document.querySelector('footer'), 'Footer vorhanden', 'dom');
-                 this.assert(document.querySelector('progress#coverage-progress'), 'Fortschrittsbalken für Abdeckung vorhanden', 'dom');
-            },
-             testUserRolesAndPermissions: function() { /* ... unverändert, prüft weiter auf JS und HTML Elemente ... */ }
-        };
-         document.addEventListener('DOMContentLoaded', function() { /* ... unverändert ... */ });
+        // Überprüfen, ob identity-test.js geladen wurde
+        setTimeout(() => {
+            if (!window.TestFramework) {
+                const errorContainer = document.createElement('div');
+                errorContainer.style.color = 'red';
+                errorContainer.style.fontWeight = 'bold';
+                errorContainer.style.margin = '20px';
+                errorContainer.textContent = 'Fehler: identity-test.js wurde nicht geladen. Bitte prüfen Sie den Skriptpfad.';
+                document.body.prepend(errorContainer);
+            }
+        }, 1000); // 1 Sekunde warten, um sicherzustellen, dass das Skript Zeit zum Laden hat
     </script>
 </body>
 </html>

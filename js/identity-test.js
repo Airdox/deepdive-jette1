@@ -1,4 +1,6 @@
-// JavaScript f�r Identity Test
+// JavaScript für Identity Test
+console.log('identity-test.js geladen');
+
 const TestFramework = {
     results: { identity: [], dom: [], roles: [], functional: [] },
     passed: 0,
@@ -71,9 +73,12 @@ const TestFramework = {
         this.updateUI();
     }
 };
-document.addEventListener('DOMContentLoaded', () => {
+
+// Events und Initialisierung in eine separate Funktion auslagern
+function initTestFramework() {
     const runAllBtn = document.getElementById('run-all-tests');
-    if (!runAllBtn) return; // Not a test page, skip all
+    if (!runAllBtn) return;  // Nicht auf Testseite
+    console.log('Initialisiere Tests...');
     runAllBtn.addEventListener('click', () => TestFramework.runAllTests());
     const runFuncBtn = document.getElementById('run-func-tests');
     if (runFuncBtn) {
@@ -84,4 +89,32 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
     TestFramework.runAllTests();
-});
+}
+
+// Zeigt Fehler im UI an
+function showError(message) {
+    const container = document.getElementById('identity-test-results') || document.body;
+    const p = document.createElement('p');
+    p.style.color = 'red';
+    p.textContent = 'Test-Fehler: ' + message;
+    container.appendChild(p);
+}
+
+// DOMContentLoaded oder sofort, falls schon geladen
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+        try {
+            initTestFramework();
+        } catch (e) {
+            console.error(e);
+            showError(e.message);
+        }
+    });
+} else {
+    try {
+        initTestFramework();
+    } catch (e) {
+        console.error(e);
+        showError(e.message);
+    }
+}
