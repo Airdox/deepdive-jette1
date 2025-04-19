@@ -1,1 +1,703 @@
-/* CSS-Styling */ 
+/* css/style.css */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Roboto+Mono:wght@400;700&display=swap');
+
+:root {
+    --bg-color: #16161a; /* Sehr dunkles Grau, leicht bläulich/grünlich */
+    --bg-dark: #222428; /* Dunkler Ton für Boxen */
+    --text-color: #c0c0c0; /* Heller Grauton für Haupttext */
+    --text-light: #e5e5e5; /* Sehr heller Text */
+    --text-white: #ffffff;
+    --accent-green: #32CD32; /* Limettengrün */
+    --accent-green-darker: #28a745;
+    --border-color: #3a3d42; /* Etwas sichtbarer Rand */
+    --link-color: #66ff66; /* Helles, lebendiges Grün für Links */
+    --link-hover: #99ff99;
+    --glitch-red: rgba(255, 50, 50, 0.7); /* Stärkeres Rot für Glitch */
+    --glitch-cyan: rgba(50, 255, 255, 0.7); /* Stärkeres Cyan */
+    --scanline-opacity: 0.04; /* Subtile Scanlines */
+
+    /* Fonts */
+    --font-main: 'Roboto', sans-serif;
+    --font-mono: 'Roboto Mono', monospace;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-main);
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.7;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    overflow-x: hidden; /* Verhindert horizontales Scrollen */
+}
+
+/* Subtile Scanlines/Noise über den ganzen Body */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background:
+        linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.15) 50%), /* Horizontale Scanlines */
+        linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02)); /* Vertikales Farbrauschen */
+    background-size: 100% 4px, 5px 100%;
+    z-index: -1;
+    pointer-events: none;
+    opacity: var(--scanline-opacity);
+    animation: scanline-move 20s linear infinite; /* Langsame Bewegung */
+}
+
+@keyframes scanline-move {
+    0% { background-position: 0 0; }
+    100% { background-position: 0 200px; } /* Vertikale Bewegung */
+}
+
+
+h1, h2, h3, h4 {
+    color: var(--accent-green);
+    font-family: var(--font-mono); /* Überschriften in Mono */
+    margin-top: 1.8rem;
+    margin-bottom: 1.2rem;
+    letter-spacing: 1px;
+    font-weight: 700;
+    text-shadow: 0 0 3px rgba(50, 205, 50, 0.3);
+}
+h1 { font-size: 2.2rem; }
+h2 { font-size: 1.8rem; }
+h3 { font-size: 1.5rem; }
+h4 { font-size: 1.2rem; }
+
+a {
+    color: var(--link-color);
+    text-decoration: none;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+a:hover {
+    color: var(--link-hover);
+    text-decoration: none;
+    text-shadow: 0 0 5px rgba(102, 255, 102, 0.7);
+}
+
+p {
+    margin-bottom: 1.2rem;
+}
+
+header {
+    background-color: rgba(22, 22, 26, 0.85); /* Hintergrund Header */
+    padding: 1rem 2rem;
+    border-bottom: 1px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    backdrop-filter: blur(6px); /* Etwas stärkerer Blur */
+}
+
+header h1 {
+    margin: 0;
+    font-size: 1.8rem;
+    display: inline-block;
+    color: var(--text-light); /* Weiß für den Haupttitel */
+    text-shadow: 0 0 5px var(--accent-green);
+}
+
+header h1 a { /* Stil für den Link im Header H1 (falls es einer ist) */
+    color: inherit;
+    text-decoration: none;
+}
+
+nav {
+    float: right;
+    margin-top: 0.3rem; /* Vertikal zentrieren mit H1 */
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex; /* Login-Button daneben */
+    align-items: center;
+}
+
+nav ul li {
+    display: inline-block;
+    margin-left: 1.5rem;
+}
+
+nav ul li a {
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    padding: 5px 0;
+    position: relative;
+    color: var(--text-light);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+nav ul li a::after { /* Subtiler Unterstrich-Effekt */
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 1px;
+    bottom: -2px; /* Etwas Abstand */
+    left: 0;
+    background-color: var(--link-hover);
+    transition: width 0.3s ease;
+    opacity: 0.7;
+}
+
+nav ul li a:hover,
+nav ul li a.active {
+    color: var(--link-hover);
+}
+
+nav ul li a:hover::after,
+nav ul li a.active::after {
+    width: 100%;
+    opacity: 1;
+}
+
+/* Netlify Identity Menu rechts neben die Nav */
+.netlify-identity-menu-container {
+    display: inline-block;
+    margin-left: 2rem;
+    vertical-align: middle;
+}
+.netlify-identity-menu-container .netlify-identity-button {
+    background-color: var(--accent-green);
+    color: var(--bg-color);
+    border: none;
+    padding: 8px 15px;
+    border-radius: 4px;
+    font-family: var(--font-mono);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+.netlify-identity-menu-container .netlify-identity-button:hover {
+    background-color: var(--link-hover);
+}
+
+/* Anpassungen für das Netlify Identity Widget selbst */
+.netlify-identity-modal {
+  /* Hier könnten Stile für das Modal definiert werden, aber es ist oft schwierig,
+     das Standard-Widget tiefgreifend anzupassen, ohne CSS zu überschreiben. */
+}
+
+main {
+    max-width: 960px;
+    margin: 2.5rem auto; /* Mehr Abstand oben/unten */
+    padding: 0 1.5rem;
+}
+
+footer {
+    text-align: center;
+    margin-top: 4rem;
+    padding: 1.5rem;
+    background-color: rgba(22, 22, 26, 0.85);
+    border-top: 1px solid var(--border-color);
+    font-size: 0.85rem;
+    color: #999;
+    font-family: var(--font-mono);
+}
+
+.data-box {
+    background-color: var(--bg-dark);
+    border: 1px solid var(--border-color);
+    padding: 1.8rem; /* Mehr Innenabstand */
+    margin-bottom: 2rem;
+    border-radius: 4px;
+    position: relative; /* Für Glitch-Effekte */
+    box-shadow: 0 3px 8px rgba(50, 205, 50, 0.1); /* Etwas stärkerer Schatten */
+    overflow: hidden; /* Verhindert, dass Glitch über Ränder geht */
+}
+
+/* Optional: Kleiner Glitch-Effekt auf data-box beim Hovern */
+.data-box.glitch-hover:hover {
+     animation: subtle-glitch 0.2s 2 linear;
+}
+
+@keyframes subtle-glitch {
+  0% { transform: translateX(0); }
+  50% { transform: translateX(2px); }
+  100% { transform: translateX(0); }
+}
+
+
+.flex-container {
+    display: flex;
+    gap: 25px; /* Größerer Abstand */
+    flex-wrap: wrap;
+}
+
+.flex-container > .data-box {
+    flex: 1;
+    min-width: 280px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 2rem 0;
+    font-size: 0.95rem;
+    border: 1px solid var(--border-color); /* Rahmen um die Tabelle */
+}
+
+th, td {
+    border: 1px solid var(--border-color);
+    padding: 12px 15px;
+    text-align: left;
+    color: var(--text-color);
+    vertical-align: top; /* Besser für längeren Text */
+}
+
+th {
+    background-color: #2a2d31; /* Header etwas heller als Boxen */
+    color: var(--accent-green);
+    font-family: var(--font-mono);
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+tr:nth-child(even) td { /* Zebra-Streifen nur auf td anwenden */
+    background-color: rgba(42, 45, 49, 0.6);
+}
+
+tr:hover td { /* Hover-Effekt für Zeilen */
+    background-color: rgba(50, 205, 50, 0.1);
+    color: var(--text-light);
+}
+
+.button {
+    display: inline-block;
+    background-color: var(--accent-green);
+    color: var(--bg-color);
+    padding: 12px 25px; /* Größere Buttons */
+    border-radius: 4px;
+    border: none;
+    font-family: var(--font-mono);
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+    margin-right: 10px;
+    text-shadow: none; /* Zurücksetzen für Buttons */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.button:hover {
+    background-color: var(--link-hover);
+    color: #000;
+    text-decoration: none;
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(50, 205, 50, 0.3);
+}
+
+.button:active {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(50, 205, 50, 0.2);
+}
+
+/* Button Variante */
+.button-secondary {
+    background-color: transparent;
+    color: var(--link-color);
+    border: 1px solid var(--link-color);
+    box-shadow: none;
+}
+.button-secondary:hover {
+    background-color: rgba(102, 255, 102, 0.1);
+    color: var(--link-hover);
+    border-color: var(--link-hover);
+    box-shadow: none;
+    transform: translateY(-2px);
+}
+
+
+ul, ol {
+    margin-left: 0; /* Kein doppelter Einzug */
+    padding-left: 25px; /* Platz für Marker */
+    margin-bottom: 1.5rem;
+}
+li {
+    margin-bottom: 0.8rem;
+    padding-left: 5px; /* Leichter Abstand zum Marker */
+}
+
+ul {
+    list-style-type: none; /* Benutzerdefinierte Marker */
+}
+ul li::before {
+    content: ">"; /* Terminal-artiger Marker */
+    color: var(--accent-green);
+    font-weight: bold;
+    display: inline-block;
+    width: 1em;
+    margin-left: -1.5em; /* Anpassen nach Bedarf */
+    font-family: var(--font-mono);
+    font-size: 1.1em;
+    margin-right: 0.5em; /* Abstand zum Text */
+}
+
+ol {
+    list-style-type: none; /* Eigene Nummerierung */
+    counter-reset: item;
+}
+ol li::before {
+    content: counter(item) ".";
+    counter-increment: item;
+    color: var(--accent-green);
+    font-weight: bold;
+    display: inline-block;
+    width: 1.5em; /* Breite anpassen */
+    margin-left: -2em; /* Anpassen nach Bedarf */
+    font-family: var(--font-mono);
+    font-size: 1.1em;
+    text-align: right;
+    margin-right: 0.5em; /* Abstand zum Text */
+}
+
+/* -------- Glitch Specific Styles -------- */
+.glitch-text {
+    display: inline-block; /* Verhindert, dass ::before/::after volle Breite einnehmen */
+    position: relative;
+    /* Wichtig: data-text Attribut im HTML setzen, sonst geht's nicht */
+}
+
+.glitch-text[data-text]::before,
+.glitch-text[data-text]::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--bg-color); /* Hintergrund der aktuellen Umgebung */
+    overflow: hidden;
+    color: var(--accent-green); /* Farbe des Glitch-Textes */
+}
+
+.glitch-text[data-text]::before {
+    left: 2px;
+    text-shadow: -1px 0 var(--glitch-red);
+    animation: glitch-anim-before 2.5s infinite linear alternate-reverse;
+    clip: rect(44px, 9999px, 56px, 0); /* Default Clip */
+}
+
+.glitch-text[data-text]::after {
+    left: -2px;
+    text-shadow: -1px 0 var(--glitch-cyan);
+    animation: glitch-anim-after 2s infinite linear alternate-reverse;
+    clip: rect(85px, 9999px, 90px, 0); /* Default Clip */
+}
+
+@keyframes glitch-anim-before {
+    0% { clip: rect(44px, 9999px, 56px, 0); transform: skew(0.2deg); opacity: 0.8; }
+    15% { clip: rect(10px, 9999px, 100px, 0); transform: skew(0.5deg); opacity: 0.7; }
+    30% { clip: rect(70px, 9999px, 80px, 0); transform: skew(-0.3deg); opacity: 0.9; }
+    45% { clip: rect(30px, 9999px, 50px, 0); transform: skew(0.4deg); opacity: 0.6; }
+    60% { clip: rect(90px, 9999px, 95px, 0); transform: skew(-0.1deg); opacity: 0.8; }
+    75% { clip: rect(55px, 9999px, 70px, 0); transform: skew(0.3deg); opacity: 0.7; }
+    100% { clip: rect(40px, 9999px, 65px, 0); transform: skew(0deg); opacity: 0.9; }
+}
+
+@keyframes glitch-anim-after {
+    0% { clip: rect(85px, 9999px, 90px, 0); transform: skew(0.5deg); opacity: 0.7; }
+    15% { clip: rect(20px, 9999px, 75px, 0); transform: skew(-0.5deg); opacity: 0.9; }
+    30% { clip: rect(50px, 9999px, 60px, 0); transform: skew(0.2deg); opacity: 0.6; }
+    45% { clip: rect(80px, 9999px, 110px, 0); transform: skew(-0.4deg); opacity: 0.8; }
+    60% { clip: rect(10px, 9999px, 25px, 0); transform: skew(0.1deg); opacity: 0.7; }
+    75% { clip: rect(65px, 9999px, 85px, 0); transform: skew(-0.3deg); opacity: 0.9; }
+    100% { clip: rect(35px, 9999px, 55px, 0); transform: skew(0deg); opacity: 0.7; }
+}
+
+
+.highlight-text {
+    color: var(--link-hover); /* Helleres Grün für Hervorhebungen */
+    font-weight: bold;
+    text-shadow: 0 0 3px rgba(153, 255, 153, 0.5);
+}
+
+hr.glitch-line {
+    border: 0;
+    height: 2px; /* Etwas dicker */
+    background-image: linear-gradient(to right, rgba(50, 205, 50, 0), var(--accent-green), rgba(50, 205, 50, 0));
+    opacity: 0.4; /* Leicht gedimmt */
+    margin: 3rem 0;
+    animation: line-flicker 5s infinite linear;
+}
+@keyframes line-flicker {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 0.2; }
+}
+
+
+/* -------- Spezifische Stile für Content-Seiten (andi-content etc.) -------- */
+.welcome-banner {
+    background-color: rgba(40, 120, 40, 0.2);
+    color: var(--text-light);
+    padding: 1.5rem 2rem; /* Mehr Padding */
+    border-radius: 4px;
+    margin-bottom: 2.5rem;
+    border-left: 5px solid var(--accent-green);
+}
+.welcome-banner h2 { margin-top: 0; }
+
+.resource-card {
+    background-color: var(--bg-dark);
+    border-radius: 4px;
+    padding: 1.8rem;
+    margin-bottom: 1.5rem;
+    border-left: 5px solid var(--link-color);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.resource-card:hover {
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 6px 15px rgba(50, 205, 50, 0.25);
+    border-color: var(--accent-green);
+}
+.resource-card h4 { margin-top: 0; }
+
+.resource-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 25px;
+    margin-top: 2.5rem;
+}
+
+.download-section {
+    margin-top: 3.5rem;
+}
+
+.download-list {
+    list-style: none;
+    padding: 0;
+    margin: 1.5rem 0;
+}
+
+.download-list li {
+    margin-bottom: 1.2rem;
+}
+
+.download-list li a {
+    display: flex;
+    align-items: center;
+    padding: 14px 20px;
+    background-color: var(--bg-dark);
+    border-radius: 4px;
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+    font-family: var(--font-mono);
+    color: var(--text-light);
+    box-shadow: inset 0 0 0 0 var(--accent-green); /* Für Hover-Effekt */
+}
+
+.download-list li a::before {
+    content: "[↓]";
+    margin-right: 15px;
+    font-size: 1.1rem;
+    color: var(--accent-green);
+    font-weight: bold;
+    transition: transform 0.3s ease;
+}
+
+.download-list li a:hover {
+    background-color: var(--bg-dark);
+    border-color: var(--accent-green);
+    text-decoration: none;
+    color: var(--accent-green);
+    transform: translateX(5px);
+    box-shadow: inset 4px 0 0 0 var(--accent-green); /* Rahmen kommt von links rein */
+}
+.download-list li a:hover::before {
+    transform: scale(1.1); /* Icon leicht vergrößern */
+}
+
+
+.note-section {
+    background-color: rgba(50, 205, 50, 0.05);
+    border: 1px solid rgba(50, 205, 50, 0.2);
+    border-left: 5px solid var(--accent-green);
+    padding: 1.5rem 2rem;
+    margin: 2.5rem 0;
+    border-radius: 0 4px 4px 0;
+    color: #c0c0c0;
+}
+.note-section h4 { margin-top: 0; color: var(--text-light); }
+
+/* -------- Spezifische Stile für `account.html` -------- */
+.account-info {
+    background-color: var(--bg-dark);
+    border-radius: 4px;
+    padding: 2rem;
+    margin-bottom: 2.5rem;
+    border: 1px solid var(--border-color);
+    font-family: var(--font-mono);
+    box-shadow: 0 3px 8px rgba(50, 205, 50, 0.1);
+}
+
+.account-info h3 {
+    margin-top: 0;
+    font-size: 1.6rem; /* Größere Überschrift */
+}
+
+.account-info p {
+    margin-bottom: 1rem;
+    line-height: 1.5;
+    color: var(--text-light);
+}
+
+.account-info strong {
+    color: var(--accent-green);
+    margin-right: 8px;
+}
+
+.role-badge {
+    display: inline-block;
+    background-color: var(--accent-green);
+    color: var(--bg-color);
+    padding: 5px 10px;
+    border-radius: 3px;
+    font-size: 0.9rem;
+    margin: 0 5px 5px 0;
+    font-family: var(--font-mono);
+    font-weight: bold;
+    box-shadow: 0 0 4px var(--accent-green);
+    text-transform: lowercase; /* Oder uppercase, je nach Geschmack */
+}
+
+.login-prompt {
+    text-align: center;
+    padding: 2.5rem;
+    background-color: var(--bg-dark);
+    border-radius: 4px;
+    border: 1px solid var(--border-color);
+}
+.login-prompt h3 { font-size: 1.7rem; }
+.login-button {
+    margin-top: 2rem;
+    padding: 12px 30px;
+    font-size: 1.2rem;
+}
+.profile-section {
+    margin-top: 3rem; /* Größerer Abstand für Profil-Info-Box */
+}
+
+.content-links { /* Spezifische Stile für die Link-Box */
+    margin-top: 2rem;
+    text-align: center; /* Zentriert den Button */
+}
+
+.content-links p {
+    margin-bottom: 1.5rem;
+}
+
+
+/* -------- Stile für `test.html` anpassen -------- */
+.test-container {
+    background-color: var(--bg-dark);
+    color: var(--text-color);
+    padding: 20px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+.test-results {
+    font-family: var(--font-mono);
+    background-color: #2a2d31; /* Leicht anderer Ton für Unterscheidung */
+    padding: 15px;
+    border-radius: 4px;
+    max-height: 350px; /* Mehr Höhe */
+    overflow-y: auto;
+    border: 1px solid #444;
+    font-size: 0.9rem;
+    color: #ccc;
+    line-height: 1.6;
+}
+.test-pass {
+    color: #66ff66;
+    font-weight: bold;
+}
+.test-fail {
+    color: #ff6666;
+    font-weight: bold;
+}
+.test-summary {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #2a2d31;
+    border-radius: 4px;
+    border: 1px solid #444;
+}
+.test-summary h3 { margin-top: 0; }
+
+progress {
+    width: 100%;
+    height: 22px;
+    appearance: none;
+    border: 1px solid var(--border-color);
+    border-radius: 3px;
+    overflow: hidden;
+    background-color: #444;
+}
+progress::-webkit-progress-bar {
+    background-color: #444;
+    border-radius: 3px;
+}
+progress::-webkit-progress-value {
+    background: linear-gradient(to right, var(--accent-green-darker), var(--accent-green));
+    border-radius: 3px 0 0 3px; /* Nur links abrunden wenn nicht voll */
+    transition: width 0.5s ease;
+    box-shadow: inset 0 0 5px rgba(0,0,0,0.3);
+}
+progress[value="100"]::-webkit-progress-value {
+    border-radius: 3px; /* Voll abrunden wenn 100% */
+}
+progress::-moz-progress-bar {
+    background: linear-gradient(to right, var(--accent-green-darker), var(--accent-green));
+    border-radius: 3px;
+    transition: width 0.5s ease;
+    box-shadow: inset 0 0 5px rgba(0,0,0,0.3);
+}
+#coverage-text { font-family: var(--font-mono); margin-top: 8px; }
+
+.test-actions {
+    margin-top: 20px;
+}
+.test-button {
+    background-color: var(--accent-green);
+    color: var(--bg-color);
+    border: none;
+    padding: 10px 18px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    margin-right: 10px;
+    transition: all 0.3s ease;
+}
+.test-button:hover {
+    background-color: var(--link-hover);
+    color: #000;
+    transform: scale(1.05);
+}
+.func-test-container {
+    margin-top: 25px;
+    border-top: 1px solid var(--border-color);
+    padding-top: 20px;
+}
+.func-test-container h4 { color: var(--link-color); } /* Farbe für Func-Test-Titel */

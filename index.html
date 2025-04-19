@@ -1,1 +1,224 @@
-<html><head><title>Index</title></head><body><h1>Willkommen auf der Startseite</h1></body></html> 
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>deepdive.Jette - Narzissmus entschlüsseln</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Matrix-spezifische Stile für die Startseite (Stil 3) */
+        .glitch-image {
+            position: relative;
+            width: 100%;
+            height: 280px; /* Etwas höher */
+            background-image: url('images/matrix-background.jpg'); /* Ersetzen mit deinem Bild */
+            background-size: cover;
+            background-position: center 30%; /* Fokus etwas nach oben */
+            margin: 3rem 0;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 0 15px rgba(50, 205, 50, 0.2), inset 0 0 20px rgba(0,0,0,0.5);
+            border-radius: 4px;
+        }
+
+        .glitch-image::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(50, 205, 50, 0.05), rgba(50, 205, 50, 0.2)); /* Leichter grüner Farbverlauf */
+            mix-blend-mode: overlay; /* Oder 'screen', experimentieren */
+            pointer-events: none;
+            animation: screen-flicker 5s infinite linear alternate;
+            opacity: 0.7;
+        }
+
+        .glitch-image::after {
+            content: attr(data-content); /* Auslagern für mehr Flexibilität */
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: var(--text-light); /* Weiß für besseren Kontrast */
+            font-size: 2.5rem;
+            font-weight: bold;
+            text-shadow: 0 0 8px var(--accent-green), 0 0 15px var(--accent-green), 0 0 25px black;
+            letter-spacing: 4px;
+            font-family: var(--font-mono);
+            text-align: center;
+            width: 80%; /* Verhindert Umbruch auf kleinen Screens */
+            animation: text-glitch-subtle 4s infinite alternate ease-in-out;
+        }
+
+        @keyframes screen-flicker {
+          0%, 100% { opacity: 0.7; }
+          30% { opacity: 0.6; }
+          60% { opacity: 0.8; }
+        }
+        @keyframes text-glitch-subtle {
+          0% { transform: translate(-50%, -50%) skew(0); opacity: 1; }
+          2% { transform: translate(-49.5%, -50.5%) skew(-0.5deg); opacity: 0.9; }
+          4% { transform: translate(-50%, -50%) skew(0); opacity: 1; }
+          48% { transform: translate(-50%, -50%) skew(0); opacity: 1; }
+          50% { transform: translate(-50.5%, -49.5%) skew(0.5deg); opacity: 0.9; }
+          52% { transform: translate(-50%, -50%) skew(0); opacity: 1; }
+          100% { transform: translate(-50%, -50%) skew(0); opacity: 1; }
+        }
+
+        .intro-text {
+             font-size: 1.15rem; /* Etwas größer */
+             line-height: 1.8;
+             margin: 2rem 0 3rem 0;
+             text-align: center;
+             color: var(--text-light);
+        }
+        .intro-text strong {
+            color: var(--link-color);
+            font-weight: 700;
+        }
+
+        .key-topics {
+            margin-top: 4rem;
+            margin-bottom: 4rem;
+        }
+        .topic-card {
+            background-color: var(--bg-dark);
+            padding: 1.8rem;
+            border-radius: 4px;
+            border-left: 5px solid var(--accent-green);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 1.5rem; /* Abstand zwischen Karten */
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+        .topic-card:hover {
+            transform: scale(1.03);
+            box-shadow: 0 5px 15px rgba(50, 205, 50, 0.2);
+        }
+        .topic-card h3 {
+            margin-top: 0;
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+        }
+        .topic-card p {
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+        .topic-card a.button {
+            margin-top: 1rem;
+        }
+
+        .cta-box { /* Call to Action */
+           text-align: center;
+           padding: 2.5rem;
+           border-top: 1px solid var(--border-color);
+           margin-top: 3rem;
+        }
+        .cta-box h3 {
+            font-size: 1.6rem;
+        }
+        .cta-box p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-light);
+        }
+        .cta-box .button {
+            font-size: 1.1rem;
+            padding: 15px 30px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1><a href="index.html" title="Zurück zur Startseite">deepdive.Jette</a></h1>
+        <nav>
+            <ul>
+                <li><a href="index.html" class="active">Startseite</a></li>
+                <li><a href="info.html">Narzissmus Verstehen</a></li>
+                <li><a href="account.html">Zugangsbereiche</a></li>
+            </ul>
+            <!-- Netlify Identity Login/Logout -->
+            <div class="netlify-identity-menu-container" data-netlify-identity-menu></div>
+        </nav>
+    </header>
+
+    <main>
+        <h2 class="glitch-text" data-text="Systemanalyse: Narzissmus">Systemanalyse: Narzissmus</h2>
+        <p class="intro-text">
+            Willkommen bei deepdive.Jette – Ihrer Ressource zur <strong class="highlight-text">Entschlüsselung narzisstischer Muster</strong>.
+            Diese Plattform bietet fundierte Einblicke, aktuelle Forschung und praxisnahe Analysen, um die Komplexität narzisstischen Verhaltens zu verstehen und effektive Umgangsstrategien zu entwickeln.
+        </p>
+
+        <div class="glitch-image" data-content="REALITÄT ENTSCHLÜSSELN">
+            <!-- Hintergrundbild wird per CSS geladen -->
+        </div>
+
+        <section class="key-topics">
+            <h3>Kernthemen im Fokus</h3>
+            <div class="flex-container">
+                <div class="topic-card glitch-hover">
+                    <h3>Was ist Narzissmus?</h3>
+                    <p>Eine detaillierte Definition, Erkennungsmerkmale und die Abgrenzung von gesundem Selbstbewusstsein zu pathologischen Zügen.</p>
+                    <a href="info.html#definition" class="button button-secondary">Mehr erfahren</a>
+                </div>
+                <div class="topic-card glitch-hover">
+                    <h3>Das Narzissmus-Spektrum</h3>
+                    <p>Von grandiosen bis zu verdeckten Mustern – Erkunden Sie die verschiedenen Ausprägungen und ihre subtilen Unterschiede.</p>
+                    <a href="info.html#spektrum" class="button button-secondary">Formen entdecken</a>
+                </div>
+                 <div class="topic-card glitch-hover">
+                    <h3>Auswirkungen & Dynamiken</h3>
+                    <p>Verstehen Sie die Konsequenzen narzisstischen Verhaltens in Beziehungen, Familie und Beruf. Erkennen Sie typische Zyklen und Manipulationsstrategien.</p>
+                    <a href="info.html#umgang" class="button button-secondary">Dynamiken analysieren</a>
+                </div>
+                 <div class="topic-card glitch-hover">
+                    <h3>Hilfe & Ressourcen</h3>
+                    <p>Finden Sie Informationen zu therapeutischen Ansätzen, Selbsthilfe-Strategien und Zugang zu exklusiven Materialien in unseren geschützten Bereichen.</p>
+                    <a href="account.html" class="button button-secondary">Zugang finden</a>
+                </div>
+            </div>
+        </section>
+
+        <hr class="glitch-line">
+
+        <section>
+            <h3 class="glitch-text" data-text="Aktuelle Einblicke">Aktuelle Einblicke</h3>
+            <div class="data-box">
+                <h4>Statistik-Snapshot</h4>
+                <ul>
+                    <li>Prävalenz der Narzisstischen Persönlichkeitsstörung (NPS) wird auf <strong class="highlight-text">bis zu 6.2%</strong> in der Allgemeinbevölkerung geschätzt (variiert nach Studie und Kriterien).</li>
+                    <li>Männer erhalten häufiger die Diagnose NPS als Frauen, wobei <strong class="highlight-text">verdeckter Narzissmus</strong> bei Frauen möglicherweise unterdiagnostiziert wird.</li>
+                    <li>Hohe Komorbidität: NPS tritt oft gemeinsam mit anderen Störungen auf, z.B. Depression, Suchterkrankungen oder anderen Persönlichkeitsstörungen.</li>
+                    <li>Weniger als <strong class="highlight-text">25% der Betroffenen</strong> suchen aktiv eine spezifische Behandlung für ihre narzisstischen Züge, oft erst aufgrund von Folgeproblemen.</li>
+                </ul>
+                <p><small>Quellen: DSM-5, Stinson et al. (2008), Pulay et al. (2009) - Hinweis: Prävalenzschätzungen können variieren.</small></p>
+            </div>
+            <div class="data-box">
+                <h4>Fallbeispiel (Anonymisiert): Das Gaslighting-Skript</h4>
+                <p>
+                    Eine Klientin berichtete von wiederholten Situationen, in denen ihr Partner Ereignisse oder Gespräche konsequent abstritt oder verdrehte ("Das habe ich nie gesagt.", "Du bist zu empfindlich."). Dies führte bei ihr zu massiven Selbstzweifeln und dem Gefühl, die eigene Wahrnehmung nicht mehr trauen zu können – ein klassisches Beispiel für <strong class="highlight-text">Gaslighting</strong>. Die Analyse dieser Muster half ihr, die Manipulation zu erkennen und Grenzen zu setzen.
+                </p>
+                 <a href="andi-content.html#fallstudie2" class="button button-secondary">Mehr Fallstudien (Zugang erforderlich)</a>
+            </div>
+        </section>
+
+        <div class="cta-box">
+            <h3 class="glitch-text" data-text="Vertiefen Sie Ihr Wissen">Vertiefen Sie Ihr Wissen</h3>
+            <p>Registrieren Sie sich oder loggen Sie sich ein, um auf spezialisierte Fallstudien, Therapieansätze und Diskussionsforen zuzugreifen.</p>
+            <a href="#" onclick="netlifyIdentity.open('login'); return false;" class="button">Systemzugriff [Login]</a>
+            <a href="#" onclick="netlifyIdentity.open('signup'); return false;" class="button button-secondary">Registrierung [Init]</a>
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2024 deepdive.Jette - Decode the patterns.</p>
+    </footer>
+
+    <!-- Netlify Identity Widget Script -->
+    <script type="text/javascript" src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    <!-- Unser Redirect-Script -->
+    <script src="js/identity-redirect.js"></script>
+
+</body>
+</html>

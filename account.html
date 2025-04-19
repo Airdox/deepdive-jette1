@@ -1,1 +1,166 @@
-<html><head><title>Account</title></head><body><h1>Account-Seite</h1></body></html> 
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zugangsbereiche - deepdive.Jette</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Zusätzliche Stile für die Account-Seite (Stil 3)*/
+         #user-info, #content-link {
+            min-height: 100px; /* Platzhalter Höhe */
+         }
+    </style>
+</head>
+<body>
+    <header>
+        <h1><a href="index.html" title="Zurück zur Startseite">deepdive.Jette</a></h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Startseite</a></li>
+                <li><a href="info.html">Narzissmus Verstehen</a></li>
+                <li><a href="account.html" class="active">Zugangsbereiche</a></li>
+            </ul>
+            <!-- Netlify Identity Login/Logout -->
+            <div class="netlify-identity-menu-container" data-netlify-identity-menu></div>
+        </nav>
+    </header>
+
+    <main>
+        <h2 class="glitch-text" data-text="Systemzugang">Systemzugang</h2>
+
+        <!-- Benutzerinfo-Bereich, wird dynamisch befüllt -->
+        <div id="user-info">
+            <div class="account-info">
+                <p>Initialisiere Benutzerdaten...</p>
+                </div>
+        </div>
+
+        <!-- Content-Link-Bereich, wird dynamisch befüllt -->
+        <div id="content-link">
+             <!-- Wird per JS befüllt -->
+        </div>
+
+        <div class="data-box profile-section glitch-hover">
+            <h4 class="glitch-text" data-text="Info: Personalisierte Zugangsebenen">Info: Personalisierte Zugangsebenen</h4>
+            <p>
+                deepdive.Jette nutzt rollenbasierte Zugangsbereiche (<strong class="highlight-text">Access Levels</strong>), um spezialisierte Materialien bereitzustellen.
+                Nach erfolgreicher Authentifizierung prüft das System Ihre Rolle und leitet Sie zu den für Sie freigegebenen Inhalten weiter.
+            </p>
+            <p>
+                Diese Inhalte umfassen:
+                <ul>
+                    <li>Vertiefende Fallstudien zu spezifischen narzisstischen Dynamiken (z.B. narzisstischer Missbrauch am Arbeitsplatz, Eltern-Kind-Beziehungen).</li>
+                    <li>Analyse komplexer Manipulationstaktiken (Gaslighting, Flying Monkeys, Silent Treatment etc.).</li>
+                    <li>Wissenschaftliche Artikel und Forschungszusammenfassungen.</li>
+                    <li>Ressourcen zu Therapieansätzen und Selbsthilfestrategien für Betroffene und Angehörige.</li>
+                    <li>Zugang zu geschützten Diskussionsforen (falls implementiert).</li>
+                </ul>
+                 Bei Fragen zur Rollenzuweisung wenden Sie sich bitte an den Systemadministrator.
+            </p>
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2024 deepdive.Jette - Decode the patterns.</p>
+    </footer>
+
+    <!-- Netlify Identity Widget Script -->
+    <script type="text/javascript" src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    <!-- Unser Redirect-Script -->
+    <script src="js/identity-redirect.js"></script>
+    <script>
+        // Wenn das DOM geladen ist
+        document.addEventListener('DOMContentLoaded', function() {
+            // Benutzerinfo-Bereich aktualisieren
+            const userInfoDiv = document.getElementById('user-info');
+            const contentLinkDiv = document.getElementById('content-link');
+
+            const displayUserInfo = (user) => {
+                const email = user.email;
+                let roles = [];
+
+                // Benutzerrollen abrufen, falls vorhanden
+                if (user.app_metadata && user.app_metadata.roles) {
+                    roles = user.app_metadata.roles;
+                }
+
+                // HTML für Benutzerinfo erstellen
+                userInfoDiv.innerHTML = `
+                    <div class="account-info">
+                        <h3>Willkommen zurück!</h3>
+                        <p><strong>USER_ID:</strong> ${email}</p>
+                        <p><strong>ACCESS_LEVEL(S):</strong> ${roles.length > 0 ? roles.map(role => `<span class="role-badge">${role}</span>`).join(' ') : '<span>STANDARD_ACCESS</span>'}</p>
+                    </div>
+                `;
+
+                // Content-Link basierend auf Rolle
+                if (roles.length > 0) {
+                    const role = roles[0]; // Erste Rolle für Weiterleitung verwenden
+                    const roleCapitalized = role.charAt(0).toUpperCase() + role.slice(1);
+                     contentLinkDiv.innerHTML = `
+                        <div class="data-box content-links glitch-hover">
+                            <h4 class="glitch-text" data-text="Persönlicher Inhaltsbereich">Persönlicher Inhaltsbereich</h4>
+                            <p>Zugriff auf Ihren spezifischen Bereich <strong class="highlight-text">[${roleCapitalized}]</strong> gewährt. Klicken Sie, um fortzufahren.</p>
+                            <a href="/${role}-content.html" class="button">Öffne ${roleCapitalized}-Sektor</a>
+                        </div>
+                    `;
+                 } else {
+                    contentLinkDiv.innerHTML = `
+                        <div class="data-box content-links">
+                            <h4>Standard-Zugriffsebene</h4>
+                            <p>Ihrem Konto sind keine spezifischen Inhaltsbereiche zugewiesen. Sie haben Zugriff auf die öffentlichen Bereiche.</p>
+                            <p>Kontaktieren Sie den Administrator, falls Sie erweiterten Zugriff benötigen.</p>
+                         </div>
+                    `;
+                }
+             };
+
+            const displayLoginPrompt = () => {
+                userInfoDiv.innerHTML = `
+                    <div class="login-prompt">
+                        <h3 class="glitch-text" data-text="Authentifizierung erforderlich">Authentifizierung erforderlich</h3>
+                        <p>Loggen Sie sich ein, um auf personalisierte Inhalte und Funktionen zuzugreifen.</p>
+                        <button class="button login-button" onclick="netlifyIdentity.open('login');">Login [Ausführen]</button>
+                        <button class="button button-secondary" onclick="netlifyIdentity.open('signup');">Registrierung [Neu]</button>
+                    </div>
+                `;
+                contentLinkDiv.innerHTML = ''; // Leeren, da kein Benutzer angemeldet ist
+            };
+
+            // Event Listener für Login und Logout
+             netlifyIdentity.on('login', user => {
+                console.log('Login event detected', user);
+                displayUserInfo(user);
+                // Automatische Weiterleitung wird durch identity-redirect.js gehandhabt
+            });
+
+            netlifyIdentity.on('logout', () => {
+                console.log('Logout event detected');
+                displayLoginPrompt();
+                // Zurück zur Account-Seite, falls man auf einer geschützten Seite war
+                 if (!window.location.pathname.includes('account.html')) {
+                   // Optional: Weiterleitung zur account.html oder Startseite nach Logout
+                   // window.location.href = '/account.html';
+                 }
+            });
+
+            netlifyIdentity.on('init', user => {
+                 console.log('Identity init', user);
+                 if (user) {
+                     displayUserInfo(user);
+                 } else {
+                     displayLoginPrompt();
+                 }
+             });
+
+             netlifyIdentity.on('error', err => {
+                console.error('Netlify Identity Error:', err);
+                // Zeige Fehlermeldung dem User?
+            });
+
+
+        });
+    </script>
+</body>
+</html>

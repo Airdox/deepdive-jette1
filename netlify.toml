@@ -1,10 +1,102 @@
-[build] 
-  publish = "." 
-[[redirects]] 
-  from = "/account" 
-  to = "/account.html" 
-  status = 200 
-[[redirects]] 
-  from = "/info" 
-  to = "/info.html" 
-  status = 200 
+# netlify.toml
+
+# Redirect-Regel, um sicherzustellen, dass Benutzer mit Rollen
+# auf die korrekte Content-Seite weitergeleitet werden,
+# falls sie versuchen, eine andere zu öffnen (optional aber gut).
+[[redirects]]
+  from = "/andi-content.html"
+  to = "/andi-content.html"
+  status = 200
+  force = true
+  conditions = {Role = ["andi"]} # Nur Benutzer mit Rolle "andi" dürfen hierher
+
+[[redirects]]
+  from = "/ricardo-content.html"
+  to = "/ricardo-content.html"
+  status = 200
+  force = true
+  conditions = {Role = ["ricardo"]}
+
+[[redirects]]
+  from = "/micha-content.html"
+  to = "/micha-content.html"
+  status = 200
+  force = true
+  conditions = {Role = ["micha"]}
+
+[[redirects]]
+  from = "/enjo-content.html"
+  to = "/enjo-content.html"
+  status = 200
+  force = true
+  conditions = {Role = ["enjo"]}
+
+[[redirects]]
+  from = "/mareen-content.html"
+  to = "/mareen-content.html"
+  status = 200
+  force = true
+  conditions = {Role = ["mareen"]}
+
+[[redirects]]
+  from = "/sonstwer-content.html"
+  to = "/sonstwer-content.html"
+  status = 200
+  force = true
+  conditions = {Role = ["sonstwer"]}
+
+# Zusätzliche Regel: Schütze die Account-Seite generell
+# Jeder eingeloggte Benutzer darf sie sehen.
+[[redirects]]
+  from = "/account.html"
+  to = "/account.html"
+  status = 200
+  force = true
+  conditions = {Role = ["*"]} # Jede zugewiesene Rolle
+
+# Fallback: Wenn jemand ohne passende Rolle versucht, eine Content-Seite
+# aufzurufen, leite ihn zum Account-Bereich oder zur Startseite um.
+# WICHTIG: Diese Regeln müssen NACH den spezifischen Rollenregeln stehen.
+[[redirects]]
+  from = "/*-content.html" # Generischer Pfad für alle Content-Seiten
+  to = "/account.html"    # Leite zum Account weiter
+  status = 302            # Temporäre Weiterleitung
+  force = true
+  # Kein `conditions`-Feld hier, greift, wenn obige nicht zutreffen
+
+# Optional: Hauptseite für jeden zugänglich machen (auch wenn nicht eingeloggt)
+[[redirects]]
+   from = "/"
+   to = "/index.html"
+   status = 200
+
+[[redirects]]
+   from = "/info.html"
+   to = "/info.html"
+   status = 200
+
+# Downloads schützen (Beispiel für Andi)
+# Zugriff nur für Benutzer mit der Rolle "andi"
+[[redirects]]
+  from = "/downloads/andi/*"
+  to = "/downloads/andi/:splat" # :splat hält den Dateinamen
+  status = 200
+  force = true
+  conditions = {Role = ["andi"]}
+
+# Fallback für Downloads (optional: auf Account-Seite oder 404 umleiten)
+[[redirects]]
+  from = "/downloads/*"
+  to = "/account.html" # Oder "/404.html"
+  status = 403 # Forbidden (oder 302 für Redirect)
+  force = true
+
+# Optional: Headless Redirect für Rollen-Prüfung auf Account-Seite selbst
+# (wird primär vom JS gehandhabt, kann aber als Netz dienen)
+[[redirects]]
+    from = "/account.html"
+    to = "/andi-content.html"
+    status = 200 # Wichtig: 200 für 'rewrite'
+    force = true
+    conditions = {Role = ["andi"]}
+# ... Wiederhole für jede andere Rolle ...
