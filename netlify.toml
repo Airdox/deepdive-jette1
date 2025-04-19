@@ -62,7 +62,7 @@
   to = "/account.html"    # Leite zum Account weiter
   status = 302            # Temporäre Weiterleitung
   force = true
-  # Kein `conditions`-Feld hier, greift, wenn obige nicht zutreffen
+  conditions = {Role = ["*"]} # Einheitliche Bedingungen
 
 # Optional: Hauptseite für jeden zugänglich machen (auch wenn nicht eingeloggt)
 [[redirects]]
@@ -91,12 +91,9 @@
   status = 403 # Forbidden (oder 302 für Redirect)
   force = true
 
-# Optional: Headless Redirect für Rollen-Prüfung auf Account-Seite selbst
-# (wird primär vom JS gehandhabt, kann aber als Netz dienen)
+# Generelle Fallback-Regel für nicht definierte Seiten
 [[redirects]]
-    from = "/account.html"
-    to = "/andi-content.html"
-    status = 200 # Wichtig: 200 für 'rewrite'
-    force = true
-    conditions = {Role = ["andi"]}
-# ... Wiederhole für jede andere Rolle ...
+  from = "/*"
+  to = "/404.html"
+  status = 404
+  force = true
