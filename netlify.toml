@@ -85,15 +85,18 @@
   conditions = {Role = ["andi"]}
 
 # Fallback für Downloads (optional: auf Account-Seite oder 404 umleiten)
+# Leitet nicht berechtigte Anfragen auf die Account-Seite um.
 [[redirects]]
   from = "/downloads/*"
-  to = "/account.html" # Oder "/404.html"
-  status = 403 # Forbidden (oder 302 für Redirect)
+  to = "/account.html" # Ziel für nicht berechtigte Zugriffe
+  status = 302 # Temporäre Weiterleitung statt 403 Forbidden
   force = true
+  # Keine expliziten conditions hier, da es als Fallback nach der spezifischen Regel dient.
 
 # Generelle Fallback-Regel für nicht definierte Seiten
+# Leitet auf die Startseite um, da 404.html nicht existiert.
 [[redirects]]
   from = "/*"
-  to = "/404.html"
+  to = "/index.html" # Geändert von /404.html
   status = 404
   force = true
