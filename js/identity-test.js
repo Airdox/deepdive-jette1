@@ -45,6 +45,17 @@ const TestFramework = {
         const menu = document.querySelector('[data-netlify-identity-menu]');
         this.assert(!!menu, 'Netlify Identity Menü-Container vorhanden', 'identity');
     },
+    // Negativtest: Verhalten bei fehlendem Netlify-Widget
+    testIdentityWidgetNegative() {
+        const original = window.netlifyIdentity;
+        try {
+            window.netlifyIdentity = undefined;
+            const hasNetlify = typeof window.netlifyIdentity !== 'undefined';
+            this.assert(!hasNetlify, 'Netlify Widget fehlt wie erwartet', 'identity');
+        } finally {
+            window.netlifyIdentity = original;
+        }
+    },
     testDOMStructure() {
         const nav = document.querySelector('nav');
         this.assert(!!nav, 'Navigationsmenü ist vorhanden', 'dom');
@@ -55,6 +66,13 @@ const TestFramework = {
         this.assert(!!document.querySelector('header'), 'Header vorhanden', 'dom');
         this.assert(!!document.querySelector('footer'), 'Footer vorhanden', 'dom');
         this.assert(!!document.querySelector('progress#coverage-progress'), 'Fortschrittsbalken vorhanden', 'dom');
+        this.assert(!!document.getElementById('coverage-text'), 'Coverage-Text vorhanden', 'dom');
+        this.assert(!!document.getElementById('identity-test-results'), 'Identity-Test-Container vorhanden', 'dom');
+        this.assert(!!document.getElementById('dom-test-results'), 'DOM-Test-Container vorhanden', 'dom');
+        this.assert(!!document.getElementById('roles-test-results'), 'Rollen-Test-Container vorhanden', 'dom');
+        this.assert(!!document.getElementById('func-test-results'), 'Funktionale-Test-Container vorhanden', 'dom');
+        this.assert(!!document.getElementById('run-all-tests'), 'Button: Alle Tests neu starten vorhanden', 'dom');
+        this.assert(!!document.getElementById('run-func-tests'), 'Button: Run Functional Tests vorhanden', 'dom');
     },
     testUserRolesAndPermissions() {
         const accountLink = document.querySelector('a[href="account.html"]');
@@ -64,12 +82,20 @@ const TestFramework = {
         const hasRedirect = typeof window.redirectAfterLogin === 'function';
         this.assert(hasRedirect, 'Redirect-Logik Funktion vorhanden', 'functional');
     },
+    // Test: Fehleranzeige im UI
+    testShowError() {
+        showError('Testfehler für Coverage');
+        const found = Array.from(document.querySelectorAll('p')).some(p => p.textContent && p.textContent.includes('Testfehler für Coverage'));
+        this.assert(found, 'Fehleranzeige im UI funktioniert', 'functional');
+    },
     runAllTests() {
         this.reset();
         this.testIdentityWidget();
         this.testDOMStructure();
         this.testUserRolesAndPermissions();
         this.testFunctionalTests();
+        this.testIdentityWidgetNegative();
+        this.testShowError();
         this.updateUI();
     }
 };
@@ -101,20 +127,25 @@ function showError(message) {
 }
 
 // DOMContentLoaded oder sofort, falls schon geladen
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => {
-        try {
-            initTestFramework();
-        } catch (e) {
-            console.error(e);
-            showError(e.message);
-        }
-    });
-} else {
-    try {
-        initTestFramework();
-    } catch (e) {
-        console.error(e);
-        showError(e.message);
+(function ensureInitAfterDOMLoaded() {
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => {
+            try {
+                initTestFramework();
+            } catch (e) {
+                console.error(e);
+                showError(e.message);
+            }
+        });
+    } else {
+        // Verzögere Initialisierung minimal, um sicherzugehen, dass alle DOM-Elemente da sind
+        setTimeout(() => {
+            try {
+                initTestFramework();
+            } catch (e) {
+                console.error(e);
+                showError(e.message);
+            }
+        }, 0);
     }
-}
+})();

@@ -60,6 +60,33 @@ test.describe('Netlify Redirect-Regeln für Benutzerrollen', () => {
   });
 });
 
+test.describe('Netlify Redirect-Regeln für Benutzerrolle "ricardo"', () => {
+  test('Berechtigter Benutzer "ricardo" kann auf ricardo-content.html zugreifen', async ({ page }) => {
+    await AuthHelper.loginAs(page, 'ricardo');
+    await page.goto('/ricardo-content.html');
+    await waitForNavigation(page);
+    expect(page.url()).toContain('ricardo-content.html');
+    const pageContent = await page.textContent('body');
+    expect(pageContent).toContain('Ricardo'); // Annahme: Die Seite enthält irgendwo den Text "Ricardo"
+  });
+
+  test('Unberechtigter Benutzer wird von ricardo-content.html zu account.html weitergeleitet', async ({ page }) => {
+    await AuthHelper.loginAs(page, 'andi');
+    await page.goto('/ricardo-content.html');
+    await waitForNavigation(page);
+    expect(page.url()).toContain('account.html');
+    const pageContent = await page.textContent('body');
+    expect(pageContent).toContain('Account');
+  });
+
+  test('Nicht eingeloggter Benutzer wird zur Account-Seite weitergeleitet', async ({ page }) => {
+    await AuthHelper.loginAs(page, null);
+    await page.goto('/ricardo-content.html');
+    await waitForNavigation(page);
+    expect(page.url()).toContain('account.html');
+  });
+});
+
 // Tests für Download-Zugriff - angepasst, um statt der PDF-Datei die Download-Sektion auf den Content-Seiten zu prüfen
 test.describe('Zugriff auf geschützte Downloads', () => {
   test('Benutzer "andi" kann auf seine Downloads zugreifen', async ({ page }) => {
@@ -94,6 +121,52 @@ test.describe('Zugriff auf geschützte Downloads', () => {
     const pageContent = await page.textContent('body');
     expect(pageContent).toContain('Account');
   });
+});
+
+test.describe('Zugriff auf geschützte Downloads für Ricardo', () => {
+  test('Benutzer "ricardo" kann auf seine Downloads zugreifen', async ({ page }) => {
+    await AuthHelper.loginAs(page, 'ricardo');
+    await page.goto('/ricardo-content.html');
+    await waitForNavigation(page);
+    expect(page.url()).toContain('ricardo-content.html');
+    const downloadLink = await page.locator('.download-list a');
+    const linkText = await downloadLink.textContent();
+    expect(linkText).toContain('Ricardo');
+  });
+
+  test('Benutzer ohne Berechtigung wird beim Zugriff auf Ricardos Downloads weitergeleitet', async ({ page }) => {
+    await AuthHelper.loginAs(page, 'andi');
+    await page.goto('/ricardo-content.html');
+    await waitForNavigation(page);
+    expect(page.url()).toContain('account.html');
+    const pageContent = await page.textContent('body');
+    expect(pageContent).toContain('Account');
+  });
+});
+
+test.describe('Zugriff auf geschützte Downloads für weitere Nutzer', () => {
+  const userCases = [
+    { role: 'enjo', file: 'enjo', name: 'Enjo' },
+    { role: 'mareen', file: 'mareen', name: 'Mareen' },
+    { role: 'micha', file: 'micha', name: 'Micha' },
+    { role: 'sonstwer', file: 'sonstwer', name: 'Sonstwer' },
+  ];
+  for (const { role, file, name } of userCases) {
+    test(`Benutzer "${role}" kann auf seinen Download zugreifen`, async ({ page }) => {
+      await AuthHelper.loginAs(page, role);
+      // Direkter Zugriff auf die PDF-Datei im Download-Ordner
+      await page.goto(`/downloads/${file}/datei_${file}.pdf`);
+      // Prüfe, ob die Datei geladen wird (Status 200)
+      expect(page.response().status()).toBe(200);
+    });
+    test(`Unberechtigter Benutzer wird beim Zugriff auf Download von ${role} blockiert`, async ({ page }) => {
+      await AuthHelper.loginAs(page, 'andi');
+      await page.goto(`/downloads/${file}/datei_${file}.pdf`);
+      // Prüfe, ob Zugriff verweigert wird (z.B. 403 oder Weiterleitung)
+      const status = page.response().status();
+      expect([401, 403, 302, 307, 404]).toContain(status);
+    });
+  }
 });
 
 // Tests für die allgemeinen Seiten
