@@ -3,19 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zugang: Andi - deepdive.Jette</title> {/* Titel angepasst */}
+    <title>Zugang: Andi - deepdive.Jette</title>
     <link rel="stylesheet" href="css/style.css">
-    <!-- Netlify-Redirect-Simulator einbinden -->
+    <!-- Netlify-Redirect-Simulator einbinden (falls lokal getestet wird) -->
     <script src="js/netlify-redirect-simulator.js"></script>
+    <!-- Netlify Identity Widget Script -->
+    <script type="text/javascript" src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 <body>
     <header>
-        <h1><a href="index.html" title="Zurück zur Startseite">deepdive.Jette</a></h1>
+        <h1><a href="index.html" title="Zurück zur Startseite" class="glitch-text" data-text="deepdive.Jette">deepdive.Jette</a></h1>
         <nav>
             <ul>
-                <li><a href="index.html">Startseite</a></li>
-                <li><a href="info.html">Narzissmus Verstehen</a></li>
-                <li><a href="account.html">Zugangsbereiche</a></li>
+                <li><a href="index.html">Start</a></li>
+                <li><a href="info.html">Info</a></li>
+                <li><a href="account.html">Account</a></li>
+                <!-- Aktiven Link ggf. dynamisch setzen -->
             </ul>
             <div class="netlify-identity-menu-container" data-netlify-identity-menu></div>
         </nav>
@@ -23,56 +26,81 @@
 
     <main>
         <div class="welcome-banner">
-            {/* Text und data-text angepasst */}
-            <h2 class="glitch-text" data-text="Willkommen im Andi-Bereich">Willkommen im Andi-Bereich</h2>
-            {/* Profilname angepasst */}
-            <p>Spezialisierte Inhalte für das Profil <strong class="highlight-text">[Andi]</strong>.</p>
+            <h2 class="glitch-text" data-text="Willkommen // Sektor [Andi]">Willkommen // Sektor [Andi]</h2>
+            <p>Authentifizierung erfolgreich. Zugriff auf spezialisierte Inhalte für Profil <strong class="highlight-text">[Andi]</strong> gewährt.</p>
         </div>
 
-        <section>
-             {/* Rollenname angepasst */}
-             <h3>Inhaltsbereich für Andi</h3>
-             {/* Rollenname angepasst */}
-             <p>Dieser Bereich wird spezifische Inhalte für die Rolle "Andi" enthalten.</p>
+        <section id="strategien">
+             <h3 class="glitch-text" data-text="Strategien // Professioneller Kontext">Strategien // Professioneller Kontext</h3>
+             <p>Dieser Sektor fokussiert auf die Anwendung von Interaktionsprotokollen im beruflichen Umfeld bei Konfrontation mit narzisstischen Mustern.</p>
              <div class="resource-grid">
-                {/* Rollenname angepasst */}
-                <div class="resource-card"><h4>Allgemeine Ressourcen (Andi)</h4><p>Beschreibung folgt...</p></div>
+                <div class="resource-card glitch-hover">
+                    <h4>Grenzen setzen im Team</h4>
+                    <p>Analyse von Fallbeispielen zur Durchsetzung professioneller Grenzen gegenüber dominant-narzisstischem Verhalten von Kollegen oder Vorgesetzten.</p>
+                    <a href="#" class="button button-secondary">Details anzeigen &gt;</a>
+                </div>
+                 <div class="resource-card glitch-hover">
+                    <h4>Kommunikationsprotokoll "Grauer Fels"</h4>
+                    <p>Implementierung der "Grauer Fels"-Methode zur Deeskalation und Minimierung emotionaler Angriffsfläche in Meetings und direkter Interaktion.</p>
+                     <a href="#" class="button button-secondary">Protokoll laden &gt;</a>
+                </div>
+                 <div class="resource-card glitch-hover">
+                    <h4>Dokumentation & Eskalation</h4>
+                    <p>Richtlinien zur sachlichen Dokumentation von Vorfällen und Eskalationspfade innerhalb der Organisationsstruktur.</p>
+                     <a href="#" class="button button-secondary">Richtlinien prüfen &gt;</a>
+                </div>
              </div>
         </section>
 
          <div class="note-section">
-            <h4 class="glitch-text" data-text="Hinweis zur Nutzung">Hinweis zur Nutzung</h4>
-            <p>Alle Materialien sind vertraulich.</p>
+            <h4 class="glitch-text" data-text="Systemintegrität // Vertraulichkeit">Systemintegrität // Vertraulichkeit</h4>
+            <p>Alle bereitgestellten Daten und Simulationen unterliegen der Vertraulichkeit. Weitergabe oder unautorisierte Nutzung ist untersagt.</p>
         </div>
 
         <section class="download-section">
-            {/* Rollenname in Text und data-text angepasst */}
-            <h3 class="glitch-text" data-text="Exklusive Downloads [Andi]">Exklusive Downloads [Andi]</h3>
+            <h3 class="glitch-text" data-text="Exklusive Downloads // Sektor [Andi]">Exklusive Downloads // Sektor [Andi]</h3>
             <ul class="download-list">
                 <li>
-                    {/* Link und Text angepasst */}
-                    <a href="/downloads/andi/infografik.png" download>Andi - Infografik Übersicht</a>
+                    <a href="/downloads/andi/leitfaden_umgang_nps.pdf" download>Leitfaden: Umgang mit NPS im Beruf [PDF]</a>
+                </li>
+                 <li>
+                    <a href="/downloads/andi/checkliste_grenzen.pdf" download>Checkliste: Grenzen setzen [PDF]</a>
                 </li>
              </ul>
-             {/* Pfad im Hinweis angepasst */}
-             <p><small>Hinweis: Dateien müssen in `/downloads/andi/` liegen.</small></p>
+             <p><small>Hinweis: Sicherstellen, dass die Dateien im Verzeichnis <code>/downloads/andi/</code> verfügbar sind.</small></p>
         </section>
 
+        <hr class="glitch-line">
+
         <div class="data-box">
-             {/* Rollenname angepasst */}
-            <h4>Forum [Andi-Sektor]</h4>
-             {/* Rollenname angepasst */}
-             <p>Austauschbereich für Andi (derzeit offline).</p>
-            <a href="account.html" class="button">Zurück zum Account</a>
+            <h4 class="glitch-text" data-text="Kommunikationskanal [Andi]">Kommunikationskanal [Andi]</h4>
+             <p>Sicherer Austauschkanal für Benutzer mit Rolle "Andi". Status: <strong class="highlight-text">[Offline // Wartung]</strong>.</p>
+            <a href="account.html" class="button button-secondary">Zurück zur Rollenmatrix</a>
         </div>
     </main>
 
     <footer>
-        {/* Zugangsebene angepasst */}
-        <p>© 2024 deepdive.Jette - Zugangsebene: Andi</p>
+        <p>© <span id="current-year"></span> deepdive.Jette - // Sektor [Andi] // Decode the patterns //</p>
     </footer>
 
-    <script type="text/javascript" src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    <!-- Unser Redirect-Script -->
     <script src="js/identity-redirect.js"></script>
+    <script>
+        // Aktuelles Jahr im Footer setzen
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+        // Hier könnte Logik stehen, um den aktiven Nav-Link basierend auf der Seite zu setzen
+        // Beispiel: Wenn die URL andi-content.html enthält, markiere den Account-Link
+        document.querySelectorAll('nav a').forEach(link => {
+            if (window.location.pathname.includes('andi-content.html')) {
+                 // Finde den Link zum Account und markiere ihn (oder einen spezifischen Andi-Link, falls vorhanden)
+                 if (link.getAttribute('href') === 'account.html') {
+                     link.classList.add('active');
+                 }
+            } else {
+                 // Standard-Logik für andere Seiten
+                 // ... (wie in anderen Dateien)
+            }
+        });
+    </script>
 </body>
 </html>
