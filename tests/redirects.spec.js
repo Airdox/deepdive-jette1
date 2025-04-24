@@ -222,13 +222,15 @@ test.describe('Fallback-Regeln für nicht definierte Seiten (lokal)', () => {
   for (const role of userCases) {
     test(`Nicht existierende ${role}-content.html gibt lokal 404 zurück`, async ({ page }) => {
       await AuthHelper.loginAs(page, role); // Login spielt lokal keine Rolle für 404
-      const response = await page.goto(`/${role}-content.html`);
+      const response = await page.goto(`/${role}-content.html`, { failOnStatusCode: false });
+      expect(response).not.toBeNull();
       expect(response.status()).toBe(404);
     });
 
-    test(`Unberechtigter Benutzer bei nicht existierender ${role}-content.html erhält lokal 404`, async ({ page }) => {
       await AuthHelper.loginAs(page, 'andi');
-      const response = await page.goto(`/${role}-content.html`);
+      const response = await page.goto(`/${role}-content.html`, { failOnStatusCode: false });
+      expect(response).not.toBeNull();
+      expect(response.status()).toBe(404);
       expect(response.status()).toBe(404);
     });
   }
