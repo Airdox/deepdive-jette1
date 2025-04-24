@@ -23,11 +23,13 @@
     </header>
 
     <main>
-        <h2 class="glitch-text" data-text="Systemdiagnose">Systemdiagnose</h2>
-        <p>Diese Seite führt automatische Tests für die deepdive.Jette-Website durch und überprüft die Konfiguration.</p>
+        <div class="data-box glitch-hover test-container">
+            <h2 class="glitch-text" data-text="Systemdiagnose">Systemdiagnose</h2>
+            <p>Diese Seite führt automatische Tests für die deepdive.Jette-Website durch und überprüft die Konfiguration.</p>
+        </div>
 
-        <div class="test-container">
-            <h3>Identity & Redirect Tests</h3>
+        <div class="data-box glitch-hover test-container">
+            <h3 class="glitch-text">Identity & Redirect Tests</h3>
             <div class="test-results" id="identity-test-results">
                 <p>Prüfe Authentifizierungssystem...</p>
             </div>
@@ -43,21 +45,21 @@
             </div>
         </div>
 
-        <div class="test-container">
-            <h3>DOM Struktur & Elemente</h3>
+        <div class="data-box glitch-hover test-container">
+            <h3 class="glitch-text">DOM Struktur & Elemente</h3>
             <div class="test-results" id="dom-test-results">
                 <p>Analysiere Seitenstruktur...</p>
             </div>
         </div>
 
-        <div class="test-container">
-            <h3>Rollen & Berechtigungen</h3>
+        <div class="data-box glitch-hover test-container">
+            <h3 class="glitch-text">Rollen & Berechtigungen</h3>
             <div class="test-results" id="roles-test-results">
                 <p>Validiere Rollenkonfiguration...</p>
             </div>
         </div>
 
-        <div class="test-summary">
+        <div class="data-box glitch-hover test-summary">
             <h3 class="glitch-text" data-text="Testabdeckung [%]">Testabdeckung [%]</h3>
             <progress id="coverage-progress" value="0" max="100"></progress>
             <p id="coverage-text">Berechne Systemstabilität...</p>
