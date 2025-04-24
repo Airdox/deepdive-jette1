@@ -2,22 +2,23 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Roboto+Mono:wght@400;700&display=swap');
 
 :root {
-    --bg-color: #16161a; /* Sehr dunkles Grau, leicht bläulich/grünlich */
-    --bg-dark: #222428; /* Dunkler Ton für Boxen */
-    --text-color: #c0c0c0; /* Heller Grauton für Haupttext */
-    --text-light: #e5e5e5; /* Sehr heller Text */
+    --bg-color: #0D0D0D; /* Noch dunkleres Schwarz */
+    --bg-dark: #1A1A1A; /* Dunkler Ton für Boxen */
+    --text-color: #B0B0B0; /* Leicht angepasstes Grau */
+    --text-light: #E0E0E0;
     --text-white: #ffffff;
-    --accent-green: #32CD32; /* Limettengrün */
-    --accent-green-darker: #28a745;
-    --border-color: #3a3d42; /* Etwas sichtbarer Rand */
-    --link-color: #66ff66; /* Helles, lebendiges Grün für Links */
-    --link-hover: #99ff99;
-    --glitch-red: rgba(255, 50, 50, 0.7); /* Stärkeres Rot für Glitch */
-    --glitch-cyan: rgba(50, 255, 255, 0.7); /* Stärkeres Cyan */
-    --scanline-opacity: 0.04; /* Subtile Scanlines */
+    --accent-green: #00FF00; /* Reines Grün */
+    --accent-green-darker: #00CC00; /* Dunkleres Grün */
+    --border-color: #00FF00; /* Leuchtender Rand */
+    --link-color: #39FF14; /* Neon-Grün für Links */
+    --link-hover: #90EE90; /* Helleres Grün für Hover */
+    --glitch-red: rgba(255, 0, 0, 0.8); /* Intensiveres Rot */
+    --glitch-cyan: rgba(0, 255, 255, 0.8); /* Intensiveres Cyan */
+    --scanline-opacity: 0.06; /* Etwas stärkere Scanlines */
+    --glow-color: rgba(0, 255, 0, 0.5); /* Farbe für Glüheffekte */
 
     /* Fonts */
-    --font-main: 'Roboto', sans-serif;
+    --font-main: 'Roboto Mono', monospace; /* Hauptschriftart auf Mono geändert */
     --font-mono: 'Roboto Mono', monospace;
 }
 
@@ -28,15 +29,21 @@
 body {
     font-family: var(--font-main);
     background-color: var(--bg-color);
+    /* Hintergrundbild hinzufügen */
+    background-image: url('../images/matrix-background.jpg');
+    background-size: cover; /* Bild anpassen */
+    background-position: center center;
+    background-attachment: fixed; /* Bild fixieren */
+    background-blend-mode: multiply; /* Mit Hintergrundfarbe mischen */
     color: var(--text-color);
     line-height: 1.7;
     margin: 0;
     padding: 0;
     position: relative;
-    overflow-x: hidden; /* Verhindert horizontales Scrollen */
+    overflow-x: hidden;
 }
 
-/* Subtile Scanlines/Noise über den ganzen Body */
+/* Overlay für Abdunklung und Scanlines */
 body::before {
     content: "";
     position: fixed;
@@ -44,46 +51,49 @@ body::before {
     left: 0;
     right: 0;
     bottom: 0;
+    /* Dunkle Überlagerung + Scanlines */
     background:
-        linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.15) 50%), /* Horizontale Scanlines */
-        linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02)); /* Vertikales Farbrauschen */
-    background-size: 100% 4px, 5px 100%;
-    z-index: -1;
+        linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8)), /* Abdunklung */
+        linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), /* Horizontale Scanlines */
+        linear-gradient(90deg, rgba(0, 255, 0, 0.03), rgba(0, 0, 0, 0.02), rgba(0, 255, 0, 0.03)); /* Vertikales grünes Rauschen */
+    background-size: 100% 100%, 100% 3px, 4px 100%; /* Größen anpassen */
+    z-index: -1; /* Hinter dem Inhalt */
     pointer-events: none;
-    opacity: var(--scanline-opacity);
-    animation: scanline-move 20s linear infinite; /* Langsame Bewegung */
+    opacity: 1; /* Volle Deckkraft für den Overlay-Effekt */
+    animation: scanline-move 30s linear infinite; /* Langsamere Bewegung */
 }
 
 @keyframes scanline-move {
-    0% { background-position: 0 0; }
-    100% { background-position: 0 200px; } /* Vertikale Bewegung */
+    0% { background-position: 0 0, 0 0, 0 0; }
+    100% { background-position: 0 0, 0 300px, 0 0; } /* Nur Scanlines bewegen */
 }
 
 
 h1, h2, h3, h4 {
     color: var(--accent-green);
-    font-family: var(--font-mono); /* Überschriften in Mono */
+    font-family: var(--font-mono);
     margin-top: 1.8rem;
     margin-bottom: 1.2rem;
-    letter-spacing: 1px;
+    letter-spacing: 1.5px; /* Mehr Spacing */
     font-weight: 700;
-    text-shadow: 0 0 3px rgba(50, 205, 50, 0.3);
+    text-shadow: 0 0 5px var(--glow-color), 0 0 10px var(--glow-color); /* Stärkerer Glüheffekt */
 }
-h1 { font-size: 2.2rem; }
-h2 { font-size: 1.8rem; }
-h3 { font-size: 1.5rem; }
-h4 { font-size: 1.2rem; }
+h1 { font-size: 2.4rem; } /* Etwas größer */
+h2 { font-size: 2.0rem; }
+h3 { font-size: 1.6rem; }
+h4 { font-size: 1.3rem; }
 
 a {
     color: var(--link-color);
     text-decoration: none;
     transition: color 0.3s ease, text-shadow 0.3s ease;
+    text-shadow: 0 0 3px rgba(57, 255, 20, 0.5); /* Leichter Glanz für Links */
 }
 
 a:hover {
     color: var(--link-hover);
     text-decoration: none;
-    text-shadow: 0 0 5px rgba(102, 255, 102, 0.7);
+    text-shadow: 0 0 8px var(--glow-color), 0 0 15px var(--glow-color); /* Intensiverer Glanz beim Hover */
 }
 
 p {
@@ -91,71 +101,75 @@ p {
 }
 
 header {
-    background-color: rgba(22, 22, 26, 0.85); /* Hintergrund Header */
+    background-color: rgba(10, 10, 10, 0.9); /* Dunklerer Header */
     padding: 1rem 2rem;
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color); /* Leuchtender Rand */
+    box-shadow: 0 2px 10px rgba(0, 255, 0, 0.2); /* Grüner Schatten */
     position: sticky;
     top: 0;
     z-index: 1000;
-    backdrop-filter: blur(6px); /* Etwas stärkerer Blur */
+    backdrop-filter: blur(8px); /* Stärkerer Blur */
 }
 
 header h1 {
     margin: 0;
     font-size: 1.8rem;
     display: inline-block;
-    color: var(--text-light); /* Weiß für den Haupttitel */
-    text-shadow: 0 0 5px var(--accent-green);
+    color: var(--text-light);
+    text-shadow: 0 0 8px var(--accent-green); /* Angepasster Schatten */
 }
 
-header h1 a { /* Stil für den Link im Header H1 (falls es einer ist) */
+header h1 a {
     color: inherit;
     text-decoration: none;
 }
 
 nav {
     float: right;
-    margin-top: 0.3rem; /* Vertikal zentrieren mit H1 */
+    margin-top: 0.3rem;
 }
 
 nav ul {
     list-style: none;
     margin: 0;
     padding: 0;
-    display: flex; /* Login-Button daneben */
+    display: flex;
     align-items: center;
 }
 
 nav ul li {
     display: inline-block;
-    margin-left: 1.5rem;
+    margin-left: 1.8rem; /* Mehr Abstand */
 }
 
 nav ul li a {
     font-family: var(--font-mono);
-    font-size: 1rem;
+    font-size: 1.1rem; /* Etwas größer */
     padding: 5px 0;
     position: relative;
     color: var(--text-light);
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 1px; /* Mehr Spacing */
+    transition: color 0.3s ease, text-shadow 0.3s ease; /* Übergang für Textschatten */
 }
 
-nav ul li a::after { /* Subtiler Unterstrich-Effekt */
+nav ul li a::after {
     content: '';
     position: absolute;
     width: 0;
-    height: 1px;
-    bottom: -2px; /* Etwas Abstand */
+    height: 2px; /* Dickerer Unterstrich */
+    bottom: -4px; /* Mehr Abstand */
     left: 0;
     background-color: var(--link-hover);
-    transition: width 0.3s ease;
+    transition: width 0.3s ease, opacity 0.3s ease; /* Opacity hinzufügen */
     opacity: 0.7;
+    box-shadow: 0 0 5px var(--link-hover); /* Leuchteffekt für Unterstrich */
 }
 
 nav ul li a:hover,
 nav ul li a.active {
     color: var(--link-hover);
+    text-shadow: 0 0 5px var(--link-hover); /* Leuchteffekt für Text */
 }
 
 nav ul li a:hover::after,
@@ -164,7 +178,7 @@ nav ul li a.active::after {
     opacity: 1;
 }
 
-/* Netlify Identity Menu rechts neben die Nav */
+/* Netlify Identity Menu */
 .netlify-identity-menu-container {
     display: inline-block;
     margin-left: 2rem;
@@ -173,52 +187,59 @@ nav ul li a.active::after {
 .netlify-identity-menu-container .netlify-identity-button {
     background-color: var(--accent-green);
     color: var(--bg-color);
-    border: none;
+    border: 1px solid var(--accent-green); /* Rand hinzugefügt */
     padding: 8px 15px;
-    border-radius: 4px;
+    border-radius: 0; /* Eckig */
     font-family: var(--font-mono);
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: all 0.3s ease;
     font-weight: bold;
     text-transform: uppercase;
+    box-shadow: 0 0 5px var(--glow-color); /* Glüheffekt */
 }
 .netlify-identity-menu-container .netlify-identity-button:hover {
     background-color: var(--link-hover);
-}
-
-/* Anpassungen für das Netlify Identity Widget selbst */
-.netlify-identity-modal {
-  /* Hier könnten Stile für das Modal definiert werden, aber es ist oft schwierig,
-     das Standard-Widget tiefgreifend anzupassen, ohne CSS zu überschreiben. */
+    color: #000;
+    box-shadow: 0 0 10px var(--glow-color), 0 0 15px var(--glow-color); /* Stärkerer Glüheffekt */
 }
 
 main {
-    max-width: 960px;
-    margin: 2.5rem auto; /* Mehr Abstand oben/unten */
-    padding: 0 1.5rem;
+    max-width: 1100px; /* Breiterer Inhalt */
+    margin: 3rem auto;
+    padding: 0 2rem;
 }
 
 footer {
     text-align: center;
-    margin-top: 4rem;
-    padding: 1.5rem;
-    background-color: rgba(22, 22, 26, 0.85);
-    border-top: 1px solid var(--border-color);
-    font-size: 0.85rem;
+    margin-top: 5rem;
+    padding: 2rem;
+    background-color: rgba(10, 10, 10, 0.9); /* Dunklerer Footer */
+    border-top: 1px solid var(--border-color); /* Leuchtender Rand */
+    box-shadow: 0 -2px 10px rgba(0, 255, 0, 0.2); /* Grüner Schatten oben */
+    font-size: 0.9rem;
     color: #999;
     font-family: var(--font-mono);
 }
 
-.data-box {
-    background-color: var(--bg-dark);
-    border: 1px solid var(--border-color);
-    padding: 1.8rem; /* Mehr Innenabstand */
+/* Allgemeine Box-Styles (Matrix-Look) */
+.data-box, .resource-card, .account-info, .test-container, .login-prompt, .test-summary {
+    background-color: rgba(26, 26, 26, 0.85); /* Leicht transparenter Hintergrund */
+    border: 1px solid var(--border-color); /* Leuchtender Rand */
+    padding: 1.8rem;
     margin-bottom: 2rem;
-    border-radius: 4px;
-    position: relative; /* Für Glitch-Effekte */
-    box-shadow: 0 3px 8px rgba(50, 205, 50, 0.1); /* Etwas stärkerer Schatten */
-    overflow: hidden; /* Verhindert, dass Glitch über Ränder geht */
+    border-radius: 0; /* Eckig */
+    position: relative;
+    box-shadow: 0 0 8px var(--glow-color), inset 0 0 5px rgba(0, 255, 0, 0.1); /* Glüheffekt außen und innen */
+    overflow: hidden;
+    backdrop-filter: blur(3px); /* Leichter Blur für den Inhalt dahinter */
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
 }
+
+.data-box:hover, .resource-card:hover, .account-info:hover, .test-container:hover, .login-prompt:hover, .test-summary:hover {
+     box-shadow: 0 0 15px var(--glow-color), 0 0 25px var(--glow-color), inset 0 0 8px rgba(0, 255, 0, 0.2); /* Stärkerer Glüheffekt beim Hover */
+     border-color: var(--link-hover); /* Hellerer Rand beim Hover */
+}
+
 
 /* Optional: Kleiner Glitch-Effekt auf data-box beim Hovern */
 .data-box.glitch-hover:hover {
@@ -226,21 +247,23 @@ footer {
 }
 
 @keyframes subtle-glitch {
-  0% { transform: translateX(0); }
-  50% { transform: translateX(2px); }
-  100% { transform: translateX(0); }
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(2px, -1px) skewX(-2deg); }
+  50% { transform: translate(-1px, 1px) skewX(2deg); }
+  75% { transform: translate(1px, -2px) skewX(-1deg); }
+  100% { transform: translate(0, 0); }
 }
 
 
 .flex-container {
     display: flex;
-    gap: 25px; /* Größerer Abstand */
+    gap: 30px; /* Größerer Abstand */
     flex-wrap: wrap;
 }
 
 .flex-container > .data-box {
     flex: 1;
-    min-width: 280px;
+    min-width: 300px; /* Etwas breiter */
 }
 
 table {
@@ -248,130 +271,136 @@ table {
     border-collapse: collapse;
     margin: 2rem 0;
     font-size: 0.95rem;
-    border: 1px solid var(--border-color); /* Rahmen um die Tabelle */
+    border: 1px solid var(--border-color); /* Leuchtender Rand */
+    border-radius: 0; /* Eckig */
+    box-shadow: 0 0 8px var(--glow-color); /* Glüheffekt */
 }
 
 th, td {
-    border: 1px solid var(--border-color);
+    border: 1px solid rgba(0, 255, 0, 0.3); /* Subtilerer grüner Rand innen */
     padding: 12px 15px;
     text-align: left;
     color: var(--text-color);
-    vertical-align: top; /* Besser für längeren Text */
+    vertical-align: top;
 }
 
 th {
-    background-color: #2a2d31; /* Header etwas heller als Boxen */
+    background-color: rgba(0, 255, 0, 0.1); /* Grüner transparenter Hintergrund */
     color: var(--accent-green);
     font-family: var(--font-mono);
     font-weight: 700;
     text-transform: uppercase;
+    text-shadow: 0 0 3px var(--glow-color);
 }
 
-tr:nth-child(even) td { /* Zebra-Streifen nur auf td anwenden */
-    background-color: rgba(42, 45, 49, 0.6);
+tr:nth-child(even) td {
+    background-color: rgba(0, 50, 0, 0.15); /* Dunkelgrüner transparenter Hintergrund */
 }
 
-tr:hover td { /* Hover-Effekt für Zeilen */
-    background-color: rgba(50, 205, 50, 0.1);
+tr:hover td {
+    background-color: rgba(0, 255, 0, 0.15); /* Hellerer grüner Hover */
     color: var(--text-light);
 }
 
-.button {
+.button, .test-button { /* Gemeinsame Button-Stile */
     display: inline-block;
-    background-color: var(--accent-green);
-    color: var(--bg-color);
-    padding: 12px 25px; /* Größere Buttons */
-    border-radius: 4px;
-    border: none;
+    background-color: transparent; /* Transparent */
+    color: var(--accent-green); /* Grüne Schrift */
+    padding: 12px 25px;
+    border-radius: 0; /* Eckig */
+    border: 1px solid var(--accent-green); /* Grüner Rand */
     font-family: var(--font-mono);
     font-weight: bold;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 1.5px; /* Mehr Spacing */
     cursor: pointer;
     transition: all 0.3s ease;
     margin-top: 10px;
     margin-right: 10px;
-    text-shadow: none; /* Zurücksetzen für Buttons */
-    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    text-shadow: 0 0 5px var(--glow-color); /* Glüheffekt */
+    box-shadow: 0 0 8px rgba(0, 255, 0, 0.3); /* Leichter Außenschatten */
 }
 
-.button:hover {
-    background-color: var(--link-hover);
-    color: #000;
+.button:hover, .test-button:hover {
+    background-color: var(--accent-green); /* Grüner Hintergrund beim Hover */
+    color: var(--bg-color); /* Dunkle Schrift */
     text-decoration: none;
-    transform: translateY(-3px);
-    box-shadow: 0 4px 8px rgba(50, 205, 50, 0.3);
+    transform: translateY(-3px) scale(1.03); /* Leichter Lift und Skalierung */
+    box-shadow: 0 0 15px var(--glow-color), 0 0 25px var(--glow-color); /* Stärkerer Glüheffekt */
+    text-shadow: none; /* Textschatten entfernen, wenn Hintergrund da ist */
 }
 
-.button:active {
-    transform: translateY(-1px);
-    box-shadow: 0 2px 4px rgba(50, 205, 50, 0.2);
+.button:active, .test-button:active {
+    transform: translateY(-1px) scale(1);
+    box-shadow: 0 0 8px var(--glow-color);
 }
 
-/* Button Variante */
+/* Button Variante (jetzt primärer Stil ähnlich) */
 .button-secondary {
-    background-color: transparent;
-    color: var(--link-color);
-    border: 1px solid var(--link-color);
-    box-shadow: none;
+    /* Behält den transparenten Stil bei, vielleicht etwas weniger prominent */
+    box-shadow: 0 0 5px rgba(0, 255, 0, 0.2);
+    opacity: 0.8;
 }
 .button-secondary:hover {
-    background-color: rgba(102, 255, 102, 0.1);
+    background-color: rgba(0, 255, 0, 0.1); /* Nur leichter Hintergrund beim Hover */
     color: var(--link-hover);
     border-color: var(--link-hover);
-    box-shadow: none;
+    box-shadow: 0 0 10px var(--glow-color);
     transform: translateY(-2px);
+    opacity: 1;
 }
 
 
 ul, ol {
-    margin-left: 0; /* Kein doppelter Einzug */
-    padding-left: 25px; /* Platz für Marker */
+    margin-left: 0;
+    padding-left: 25px;
     margin-bottom: 1.5rem;
 }
 li {
     margin-bottom: 0.8rem;
-    padding-left: 5px; /* Leichter Abstand zum Marker */
+    padding-left: 5px;
 }
 
 ul {
-    list-style-type: none; /* Benutzerdefinierte Marker */
+    list-style-type: none;
 }
 ul li::before {
-    content: ">"; /* Terminal-artiger Marker */
+    content: ">>"; /* Doppelter Pfeil */
     color: var(--accent-green);
     font-weight: bold;
     display: inline-block;
-    width: 1em;
-    margin-left: -1.5em; /* Anpassen nach Bedarf */
+    width: 1.5em; /* Breite angepasst */
+    margin-left: -2em; /* Position angepasst */
     font-family: var(--font-mono);
     font-size: 1.1em;
-    margin-right: 0.5em; /* Abstand zum Text */
+    margin-right: 0.5em;
+    text-shadow: 0 0 3px var(--glow-color); /* Glüheffekt für Marker */
 }
 
 ol {
-    list-style-type: none; /* Eigene Nummerierung */
+    list-style-type: none;
     counter-reset: item;
 }
 ol li::before {
-    content: counter(item) ".";
+    content: counter(item) ":"; /* Doppelpunkt statt Punkt */
     counter-increment: item;
     color: var(--accent-green);
     font-weight: bold;
     display: inline-block;
-    width: 1.5em; /* Breite anpassen */
-    margin-left: -2em; /* Anpassen nach Bedarf */
+    width: 1.8em; /* Breite angepasst */
+    margin-left: -2.3em; /* Position angepasst */
     font-family: var(--font-mono);
     font-size: 1.1em;
     text-align: right;
-    margin-right: 0.5em; /* Abstand zum Text */
+    margin-right: 0.5em;
+    text-shadow: 0 0 3px var(--glow-color); /* Glüheffekt für Marker */
 }
 
 /* -------- Glitch Specific Styles -------- */
 .glitch-text {
     display: inline-block; /* Verhindert, dass ::before/::after volle Breite einnehmen */
     position: relative;
-    /* Wichtig: data-text Attribut im HTML setzen, sonst geht's nicht */
+    color: var(--text-light); /* Haupttextfarbe */
 }
 
 .glitch-text[data-text]::before,
@@ -382,98 +411,96 @@ ol li::before {
     left: 0;
     width: 100%;
     height: 100%;
-    background: var(--bg-color); /* Hintergrund der aktuellen Umgebung */
-    overflow: hidden;
-    color: var(--accent-green); /* Farbe des Glitch-Textes */
+    background: transparent; /* Hintergrund entfernen, da Body-BG durchscheint */
+    color: var(--accent-green);
+    text-shadow:
+        -1px 0 var(--glitch-red), /* Roter Schatten */
+        1px 0 var(--glitch-cyan); /* Cyan Schatten */
 }
 
 .glitch-text[data-text]::before {
     left: 2px;
-    text-shadow: -1px 0 var(--glitch-red);
-    animation: glitch-anim-before 2.5s infinite linear alternate-reverse;
-    clip: rect(44px, 9999px, 56px, 0); /* Default Clip */
+    animation: glitch-anim-before 3s infinite linear alternate-reverse; /* Langsamer */
+    clip: rect(10px, 9999px, 90px, 0); /* Default Clip */
 }
 
 .glitch-text[data-text]::after {
     left: -2px;
-    text-shadow: -1px 0 var(--glitch-cyan);
-    animation: glitch-anim-after 2s infinite linear alternate-reverse;
-    clip: rect(85px, 9999px, 90px, 0); /* Default Clip */
+    animation: glitch-anim-after 2.5s infinite linear alternate-reverse; /* Langsamer */
+    clip: rect(5px, 9999px, 95px, 0); /* Default Clip */
 }
 
+/* Vereinfachte Glitch-Animationen */
 @keyframes glitch-anim-before {
-    0% { clip: rect(44px, 9999px, 56px, 0); transform: skew(0.2deg); opacity: 0.8; }
-    15% { clip: rect(10px, 9999px, 100px, 0); transform: skew(0.5deg); opacity: 0.7; }
-    30% { clip: rect(70px, 9999px, 80px, 0); transform: skew(-0.3deg); opacity: 0.9; }
-    45% { clip: rect(30px, 9999px, 50px, 0); transform: skew(0.4deg); opacity: 0.6; }
-    60% { clip: rect(90px, 9999px, 95px, 0); transform: skew(-0.1deg); opacity: 0.8; }
-    75% { clip: rect(55px, 9999px, 70px, 0); transform: skew(0.3deg); opacity: 0.7; }
-    100% { clip: rect(40px, 9999px, 65px, 0); transform: skew(0deg); opacity: 0.9; }
+    0% { transform: translate(0); clip: rect(10px, 9999px, 90px, 0); opacity: 0.8; }
+    25% { transform: translate(2px, -2px); clip: rect(30px, 9999px, 70px, 0); opacity: 0.6; }
+    50% { transform: translate(-2px, 2px); clip: rect(50px, 9999px, 50px, 0); opacity: 0.9; }
+    75% { transform: translate(1px, -1px); clip: rect(70px, 9999px, 30px, 0); opacity: 0.7; }
+    100% { transform: translate(0); clip: rect(90px, 9999px, 10px, 0); opacity: 0.8; }
 }
 
 @keyframes glitch-anim-after {
-    0% { clip: rect(85px, 9999px, 90px, 0); transform: skew(0.5deg); opacity: 0.7; }
-    15% { clip: rect(20px, 9999px, 75px, 0); transform: skew(-0.5deg); opacity: 0.9; }
-    30% { clip: rect(50px, 9999px, 60px, 0); transform: skew(0.2deg); opacity: 0.6; }
-    45% { clip: rect(80px, 9999px, 110px, 0); transform: skew(-0.4deg); opacity: 0.8; }
-    60% { clip: rect(10px, 9999px, 25px, 0); transform: skew(0.1deg); opacity: 0.7; }
-    75% { clip: rect(65px, 9999px, 85px, 0); transform: skew(-0.3deg); opacity: 0.9; }
-    100% { clip: rect(35px, 9999px, 55px, 0); transform: skew(0deg); opacity: 0.7; }
+     0% { transform: translate(0); clip: rect(5px, 9999px, 95px, 0); opacity: 0.7; }
+    25% { transform: translate(-2px, 1px); clip: rect(25px, 9999px, 75px, 0); opacity: 0.9; }
+    50% { transform: translate(2px, -1px); clip: rect(45px, 9999px, 55px, 0); opacity: 0.6; }
+    75% { transform: translate(-1px, 2px); clip: rect(65px, 9999px, 35px, 0); opacity: 0.8; }
+    100% { transform: translate(0); clip: rect(85px, 9999px, 15px, 0); opacity: 0.7; }
 }
 
 
 .highlight-text {
-    color: var(--link-hover); /* Helleres Grün für Hervorhebungen */
+    color: var(--link-hover);
     font-weight: bold;
-    text-shadow: 0 0 3px rgba(153, 255, 153, 0.5);
+    text-shadow: 0 0 5px var(--glow-color), 0 0 10px var(--glow-color); /* Stärkerer Glanz */
 }
 
 hr.glitch-line {
     border: 0;
-    height: 2px; /* Etwas dicker */
-    background-image: linear-gradient(to right, rgba(50, 205, 50, 0), var(--accent-green), rgba(50, 205, 50, 0));
-    opacity: 0.4; /* Leicht gedimmt */
+    height: 1px; /* Dünner */
+    background-image: linear-gradient(to right, rgba(0, 255, 0, 0), var(--accent-green), rgba(0, 255, 0, 0));
+    opacity: 0.6; /* Etwas heller */
     margin: 3rem 0;
-    animation: line-flicker 5s infinite linear;
+    animation: line-flicker 3s infinite linear; /* Schnellere Animation */
+    box-shadow: 0 0 5px var(--glow-color); /* Glüheffekt */
 }
 @keyframes line-flicker {
-    0%, 100% { opacity: 0.4; }
-    50% { opacity: 0.2; }
+    0%, 100% { opacity: 0.6; }
+    20% { opacity: 0.2; }
+    30% { opacity: 0.8; }
+    50% { opacity: 0.3; }
+    70% { opacity: 0.9; }
+    80% { opacity: 0.4; }
 }
 
 
-/* -------- Spezifische Stile für Content-Seiten (andi-content etc.) -------- */
+/* -------- Spezifische Stile für Content-Seiten -------- */
 .welcome-banner {
-    background-color: rgba(40, 120, 40, 0.2);
+    background-color: rgba(0, 80, 0, 0.3); /* Dunkleres Grün */
     color: var(--text-light);
-    padding: 1.5rem 2rem; /* Mehr Padding */
-    border-radius: 4px;
+    padding: 1.5rem 2rem;
+    border-radius: 0; /* Eckig */
     margin-bottom: 2.5rem;
-    border-left: 5px solid var(--accent-green);
+    border: 1px solid var(--border-color); /* Standard-Rand */
+    border-left: 5px solid var(--accent-green); /* Dickerer linker Rand bleibt */
+    box-shadow: 0 0 8px var(--glow-color), inset 0 0 5px rgba(0, 255, 0, 0.1); /* Standard-Glühen */
 }
 .welcome-banner h2 { margin-top: 0; }
 
 .resource-card {
-    background-color: var(--bg-dark);
-    border-radius: 4px;
-    padding: 1.8rem;
-    margin-bottom: 1.5rem;
-    border-left: 5px solid var(--link-color);
-    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    /* Stile werden jetzt von der globalen Box-Regel übernommen */
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease; /* Übergang beibehalten */
 }
 
 .resource-card:hover {
-    transform: translateY(-6px) scale(1.02);
-    box-shadow: 0 6px 15px rgba(50, 205, 50, 0.25);
-    border-color: var(--accent-green);
+    /* Hover-Effekte werden von der globalen Box-Regel übernommen */
+    transform: translateY(-6px) scale(1.02); /* Transform beibehalten */
 }
 .resource-card h4 { margin-top: 0; }
 
 .resource-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 25px;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Etwas breiter */
+    gap: 30px; /* Größerer Abstand */
     margin-top: 2.5rem;
 }
 
@@ -495,62 +522,60 @@ hr.glitch-line {
     display: flex;
     align-items: center;
     padding: 14px 20px;
-    background-color: var(--bg-dark);
-    border-radius: 4px;
+    background-color: rgba(26, 26, 26, 0.7); /* Ähnlich wie Boxen, aber etwas anders */
+    border-radius: 0; /* Eckig */
     border: 1px solid var(--border-color);
     transition: all 0.3s ease;
     font-family: var(--font-mono);
     color: var(--text-light);
-    box-shadow: inset 0 0 0 0 var(--accent-green); /* Für Hover-Effekt */
+    box-shadow: 0 0 5px rgba(0, 255, 0, 0.2); /* Leichter Glanz */
 }
 
 .download-list li a::before {
-    content: "[↓]";
+    content: "[>]"; /* Anderes Symbol */
     margin-right: 15px;
     font-size: 1.1rem;
     color: var(--accent-green);
     font-weight: bold;
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, text-shadow 0.3s ease;
+    text-shadow: 0 0 3px var(--glow-color);
 }
 
 .download-list li a:hover {
-    background-color: var(--bg-dark);
-    border-color: var(--accent-green);
+    background-color: rgba(0, 255, 0, 0.1); /* Grüner Hintergrund */
+    border-color: var(--link-hover);
     text-decoration: none;
-    color: var(--accent-green);
-    transform: translateX(5px);
-    box-shadow: inset 4px 0 0 0 var(--accent-green); /* Rahmen kommt von links rein */
+    color: var(--link-hover);
+    transform: translateX(8px); /* Stärkere Verschiebung */
+    box-shadow: 0 0 10px var(--glow-color); /* Stärkerer Glanz */
 }
 .download-list li a:hover::before {
-    transform: scale(1.1); /* Icon leicht vergrößern */
+    transform: scale(1.1);
+    text-shadow: 0 0 8px var(--glow-color); /* Stärkerer Glanz für Symbol */
 }
 
 
 .note-section {
-    background-color: rgba(50, 205, 50, 0.05);
-    border: 1px solid rgba(50, 205, 50, 0.2);
+    background-color: rgba(0, 50, 0, 0.15); /* Dunkleres Grün */
+    border: 1px solid rgba(0, 255, 0, 0.3); /* Subtiler grüner Rand */
     border-left: 5px solid var(--accent-green);
     padding: 1.5rem 2rem;
     margin: 2.5rem 0;
-    border-radius: 0 4px 4px 0;
+    border-radius: 0; /* Eckig */
     color: #c0c0c0;
+    box-shadow: 0 0 8px rgba(0, 255, 0, 0.2); /* Leichter Glanz */
 }
 .note-section h4 { margin-top: 0; color: var(--text-light); }
 
 /* -------- Spezifische Stile für `account.html` -------- */
 .account-info {
-    background-color: var(--bg-dark);
-    border-radius: 4px;
-    padding: 2rem;
-    margin-bottom: 2.5rem;
-    border: 1px solid var(--border-color);
-    font-family: var(--font-mono);
-    box-shadow: 0 3px 8px rgba(50, 205, 50, 0.1);
+    /* Stile werden jetzt von der globalen Box-Regel übernommen */
+    font-family: var(--font-mono); /* Sicherstellen, dass Mono verwendet wird */
 }
 
 .account-info h3 {
     margin-top: 0;
-    font-size: 1.6rem; /* Größere Überschrift */
+    font-size: 1.6rem;
 }
 
 .account-info p {
@@ -562,6 +587,7 @@ hr.glitch-line {
 .account-info strong {
     color: var(--accent-green);
     margin-right: 8px;
+    text-shadow: 0 0 3px var(--glow-color);
 }
 
 .role-badge {
@@ -569,35 +595,35 @@ hr.glitch-line {
     background-color: var(--accent-green);
     color: var(--bg-color);
     padding: 5px 10px;
-    border-radius: 3px;
+    border-radius: 0; /* Eckig */
     font-size: 0.9rem;
     margin: 0 5px 5px 0;
     font-family: var(--font-mono);
     font-weight: bold;
-    box-shadow: 0 0 4px var(--accent-green);
-    text-transform: lowercase; /* Oder uppercase, je nach Geschmack */
+    box-shadow: 0 0 5px var(--glow-color);
+    text-transform: uppercase; /* Einheitlich */
+    border: 1px solid var(--accent-green);
 }
 
 .login-prompt {
+    /* Stile werden jetzt von der globalen Box-Regel übernommen */
     text-align: center;
     padding: 2.5rem;
-    background-color: var(--bg-dark);
-    border-radius: 4px;
-    border: 1px solid var(--border-color);
 }
 .login-prompt h3 { font-size: 1.7rem; }
-.login-button {
+.login-button { /* Spezifischer Button im Login-Prompt */
     margin-top: 2rem;
     padding: 12px 30px;
     font-size: 1.2rem;
+    /* Verwendet jetzt die globalen .button Stile */
 }
 .profile-section {
-    margin-top: 3rem; /* Größerer Abstand für Profil-Info-Box */
+    margin-top: 3rem;
 }
 
-.content-links { /* Spezifische Stile für die Link-Box */
+.content-links {
     margin-top: 2rem;
-    text-align: center; /* Zentriert den Button */
+    text-align: center;
 }
 
 .content-links p {
@@ -606,41 +632,48 @@ hr.glitch-line {
 
 
 /* -------- Stile für `test.html` anpassen -------- */
-.test-container {
-    background-color: var(--bg-dark);
-    color: var(--text-color);
-    padding: 20px;
-    border-radius: 4px;
-    margin-bottom: 20px;
-    border: 1px solid var(--border-color);
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-}
 .test-results {
     font-family: var(--font-mono);
-    background-color: #2a2d31; /* Leicht anderer Ton für Unterscheidung */
+    background-color: rgba(10, 10, 10, 0.8); /* Dunklerer Hintergrund */
     padding: 15px;
-    border-radius: 4px;
-    max-height: 350px; /* Mehr Höhe */
+    border-radius: 0; /* Eckig */
+    max-height: 400px; /* Mehr Höhe */
     overflow-y: auto;
-    border: 1px solid #444;
+    border: 1px solid rgba(0, 255, 0, 0.4); /* Grüner Rand */
     font-size: 0.9rem;
     color: #ccc;
     line-height: 1.6;
+    box-shadow: inset 0 0 8px rgba(0, 255, 0, 0.2); /* Innerer Glanz */
 }
+/* Scrollbar-Styling (optional, für Webkit-Browser) */
+.test-results::-webkit-scrollbar {
+    width: 8px;
+}
+.test-results::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 0;
+}
+.test-results::-webkit-scrollbar-thumb {
+    background-color: var(--accent-green);
+    border-radius: 0;
+    border: 1px solid var(--bg-dark);
+    box-shadow: 0 0 5px var(--glow-color);
+}
+
 .test-pass {
-    color: #66ff66;
+    color: var(--link-color); /* Helleres Grün */
     font-weight: bold;
+    text-shadow: 0 0 3px var(--glow-color);
 }
 .test-fail {
-    color: #ff6666;
+    color: #ff4d4d; /* Helleres Rot */
     font-weight: bold;
+    text-shadow: 0 0 3px rgba(255, 77, 77, 0.7);
 }
 .test-summary {
+    /* Stile werden jetzt von der globalen Box-Regel übernommen */
     margin-top: 20px;
     padding: 15px;
-    background-color: #2a2d31;
-    border-radius: 4px;
-    border: 1px solid #444;
 }
 .test-summary h3 { margin-top: 0; }
 
@@ -649,55 +682,43 @@ progress {
     height: 22px;
     appearance: none;
     border: 1px solid var(--border-color);
-    border-radius: 3px;
+    border-radius: 0; /* Eckig */
     overflow: hidden;
-    background-color: #444;
+    background-color: rgba(0, 50, 0, 0.2); /* Dunkelgrüner Hintergrund */
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5); /* Innerer Schatten */
 }
 progress::-webkit-progress-bar {
-    background-color: #444;
-    border-radius: 3px;
+    background-color: transparent; /* Transparent machen */
+    border-radius: 0;
 }
 progress::-webkit-progress-value {
-    background: linear-gradient(to right, var(--accent-green-darker), var(--accent-green));
-    border-radius: 3px 0 0 3px; /* Nur links abrunden wenn nicht voll */
+    background: var(--accent-green); /* Vollflächiges Grün */
+    border-radius: 0;
     transition: width 0.5s ease;
-    box-shadow: inset 0 0 5px rgba(0,0,0,0.3);
-}
-progress[value="100"]::-webkit-progress-value {
-    border-radius: 3px; /* Voll abrunden wenn 100% */
+    box-shadow: 0 0 8px var(--glow-color); /* Glüheffekt für den Balken */
 }
 progress::-moz-progress-bar {
-    background: linear-gradient(to right, var(--accent-green-darker), var(--accent-green));
-    border-radius: 3px;
+    background: var(--accent-green);
+    border-radius: 0;
     transition: width 0.5s ease;
-    box-shadow: inset 0 0 5px rgba(0,0,0,0.3);
+    box-shadow: 0 0 8px var(--glow-color);
 }
-#coverage-text { font-family: var(--font-mono); margin-top: 8px; }
+#coverage-text { font-family: var(--font-mono); margin-top: 8px; color: var(--text-light); }
 
 .test-actions {
     margin-top: 20px;
 }
 .test-button {
-    background-color: var(--accent-green);
-    color: var(--bg-color);
-    border: none;
-    padding: 10px 18px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-weight: bold;
-    font-family: var(--font-mono);
-    text-transform: uppercase;
-    margin-right: 10px;
-    transition: all 0.3s ease;
+    /* Verwendet jetzt die globalen .button Stile */
+    padding: 10px 18px; /* Behält spezifisches Padding */
 }
 .test-button:hover {
-    background-color: var(--link-hover);
-    color: #000;
-    transform: scale(1.05);
+    /* Verwendet jetzt die globalen .button:hover Stile */
+    transform: scale(1.05); /* Behält spezifische Transformation */
 }
 .func-test-container {
     margin-top: 25px;
-    border-top: 1px solid var(--border-color);
+    border-top: 1px solid var(--border-color); /* Leuchtender Rand */
     padding-top: 20px;
 }
-.func-test-container h4 { color: var(--link-color); } /* Farbe für Func-Test-Titel */
+.func-test-container h4 { color: var(--link-color); }
