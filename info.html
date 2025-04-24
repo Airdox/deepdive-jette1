@@ -8,78 +8,50 @@
     <!-- Netlify-Redirect-Simulator einbinden -->
     <script src="js/netlify-redirect-simulator.js"></script>
     <style>
-       /* Zusätzliche Stile speziell für die Info-Seite, passend zu Stil 3 */
-       .section-divider {
-            margin: 3.5rem 0;
-       }
-       .important-note {
-            background-color: rgba(255, 255, 100, 0.08); /* Leichter gelblicher Ton für Warnung/Wichtigkeit */
-            border-left: 5px solid #FFD700; /* Goldgelber Rand */
-            padding: 1.5rem 2rem;
-            margin: 2rem 0;
-            border-radius: 0 4px 4px 0;
-            color: #e0e0e0;
-       }
-       .important-note strong { color: #FFD700; }
-
-       .comparison-table th {
-           background-color: #2e2e32; /* Etwas anderer Ton für Vergleichstabellen */
-       }
-
-       .link-list {
-           list-style: none;
-           padding: 0;
-           margin: 1.5rem 0;
-       }
-       .link-list li {
-           margin-bottom: 1rem;
-           padding-left: 0; /* Standard-Padding aufheben */
-       }
-       .link-list li::before {
-           content: "🔗"; /* Link-Symbol als Marker */
-           color: var(--link-color);
-           margin-right: 10px;
-           display: inline-block;
-           font-size: 1.1em;
-       }
-       .link-list a {
-           font-family: var(--font-main); /* Normale Schrift für externe Links */
-           color: var(--link-color);
-           border-bottom: 1px dotted rgba(102, 255, 102, 0.5);
-           transition: border-bottom-color 0.3s ease, color 0.3s ease;
-       }
-       .link-list a:hover {
-           color: var(--link-hover);
-           border-bottom-color: var(--link-hover);
-           text-shadow: none;
-       }
-       .quote-box {
-            font-style: italic;
-            padding: 1rem 1.5rem 1rem 3rem;
-            margin: 1.5rem 0;
+        /* Zusätzliche Stile für die Info-Seite */
+        .content-section {
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .content-section:last-child {
+            border-bottom: none;
+        }
+        .content-section h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent-green);
+        }
+        .content-section ul {
+            list-style: none; /* Entferne Standard-Aufzählungszeichen */
+            padding-left: 0;
+        }
+        .content-section li {
             position: relative;
-            color: var(--text-light);
-            border-left: 3px solid var(--link-color);
-            background: rgba(40, 40, 44, 0.5);
-       }
-       .quote-box::before {
-            content: '“';
-            font-size: 3rem;
+            padding-left: 25px; /* Platz für das benutzerdefinierte Zeichen */
+            margin-bottom: 1rem;
+            line-height: 1.7;
+        }
+        .content-section li::before {
+            content: '\27A2'; /* Unicode-Zeichen für einen Pfeil oder Punkt */
             position: absolute;
-            left: 0.5rem;
-            top: 0rem;
-            color: var(--link-color);
-            opacity: 0.5;
-            font-family: serif;
-       }
-       .quote-box cite {
-           display: block;
-           text-align: right;
-           margin-top: 0.8rem;
-           font-style: normal;
-           font-size: 0.9rem;
-           color: var(--text-color);
-       }
+            left: 0;
+            top: 0;
+            color: var(--accent-green);
+            font-size: 1.2rem;
+            line-height: 1.7;
+        }
+        .warning-box {
+            background-color: rgba(255, 215, 0, 0.1); /* Leicht gelblich */
+            border: 1px solid gold;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 4px;
+        }
+        .warning-box h4 {
+            margin-top: 0;
+            color: gold;
+        }
     </style>
 </head>
 <body>
@@ -97,203 +69,98 @@
     </header>
 
     <main>
-        <h2 id="definition" class="glitch-text" data-text="Narzissmus: Definition & Kernmerkmale">Narzissmus: Definition & Kernmerkmale</h2>
-        <p>
-            Narzissmus ist mehr als nur Eitelkeit oder Selbstverliebtheit. Im psychologischen Kontext beschreibt es ein komplexes Persönlichkeitskonstrukt, das auf einem Spektrum von gesunden bis zu pathologischen Ausprägungen existiert. Der Begriff leitet sich von der griechischen Sage von <strong class="highlight-text">Narziss</strong> ab, der sich in sein eigenes Spiegelbild verliebte und daran zugrunde ging – ein starkes Symbol für die potenziell destruktive Selbstbezogenheit.
-        </p>
-        <p>
-            Kern der narzisstischen Persönlichkeitsstruktur ist oft ein <strong class="highlight-text">instabiles Selbstwertgefühl</strong>, das durch äußere Bewunderung und Erfolge aufrechterhalten werden muss. Dahinter können sich tiefe Unsicherheiten und ein Gefühl der Leere verbergen.
-        </p>
-        <div class="data-box">
-            <h4>Diagnostische Merkmale (nach DSM-5 für NPS)</h4>
-            <p>Die Narzisstische Persönlichkeitsstörung (NPS) ist durch ein tiefgreifendes Muster von Großartigkeit (in Fantasie oder Verhalten), Bedürfnis nach Bewunderung und Mangel an Empathie gekennzeichnet. Mindestens fünf der folgenden Kriterien müssen erfüllt sein:</p>
-            <ul>
-                <li>Hat ein grandioses Gefühl der eigenen Wichtigkeit (übertreibt eigene Leistungen und Talente).</li>
-                <li>Ist stark eingenommen von Fantasien grenzenlosen Erfolgs, Macht, Glanz, Schönheit oder idealer Liebe.</li>
-                <li>Glaubt von sich, „besonders“ und einzigartig zu sein und nur von anderen besonderen oder angesehenen Personen (oder Institutionen) verstanden zu werden oder nur mit diesen verkehren zu können.</li>
-                <li>Verlangt nach übermäßiger Bewunderung.</li>
-                <li>Legt ein Anspruchsdenken an den Tag (unrealistische Erwartungen auf eine besonders günstige Behandlung oder automatisches Eingehen auf die eigenen Erwartungen).</li>
-                <li>Ist in zwischenmenschlichen Beziehungen ausbeuterisch (nutzt andere aus, um eigene Ziele zu erreichen).</li>
-                <li>Zeigt einen Mangel an Empathie: Ist nicht willens, die Gefühle und Bedürfnisse anderer zu erkennen oder sich mit ihnen zu identifizieren.</li>
-                <li>Ist häufig neidisch auf andere oder glaubt, andere seien neidisch auf ihn/sie.</li>
-                <li>Zeigt arrogante, überhebliche Verhaltensweisen oder Haltungen.</li>
-            </ul>
-            <p><small>Hinweis: Dies sind diagnostische Kriterien. Narzisstische Züge können auch ohne vollständige Diagnose einer NPS vorliegen und problematisch sein.</small></p>
-        </div>
+        <h2 class="glitch-text" data-text="Narzissmus: Definition & Spektrum">Narzissmus: Definition & Spektrum</h2>
 
-        <hr class="glitch-line section-divider">
-
-        <h2 id="spektrum" class="glitch-text" data-text="Das Narzissmus-Spektrum">Das Narzissmus-Spektrum</h2>
-        <p>
-            Es ist entscheidend zu verstehen, dass Narzissmus nicht binär ist (entweder man ist es oder nicht), sondern sich auf einem <strong class="highlight-text">Kontinuum</strong> bewegt. Am einen Ende finden sich gesunde Anteile von Selbstwert und Ehrgeiz, am anderen Ende die klinisch relevante Narzisstische Persönlichkeitsstörung. Dazwischen gibt es unzählige Abstufungen narzisstischer Züge, die das Verhalten prägen können.
-        </p>
-
-        <div class="data-box">
-            <h4>Hauptformen und ihre Facetten</h4>
-            <table class="comparison-table">
-                <thead>
-                    <tr>
-                        <th>Form</th>
-                        <th>Kernmerkmale</th>
-                        <th>Typisches Verhalten</th>
-                        <th>Innere Motivation (oft unbewusst)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>Grandioser (offener) Narzissmus</strong></td>
-                        <td>Extrovertiert, dominant, anspruchsvoll, sucht Aufmerksamkeit</td>
-                        <td>Offenes Prahlen, Arroganz, Überlegenheitsgefühl, Wut bei Kritik, Charme zur Manipulation</td>
-                        <td>Suche nach externer Bestätigung, Aufrechterhaltung des grandiosen Selbstbildes</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Vulnerabler (verdeckter) Narzissmus</strong></td>
-                        <td>Introvertiert, hypersensibel, neidisch, ängstlich, schamgefühl-beladen</td>
-                        <td>Passive Aggression, Opferhaltung, subtile Abwertung anderer, Neid, Kränkbarkeit, sozialer Rückzug bei drohender "Entlarvung"</td>
-                        <td>Schutz des fragilen Selbstwertes, Angst vor Kritik/Ablehnung, ungestilltes Bedürfnis nach Anerkennung</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Kommunaler Narzissmus</strong></td>
-                        <td>Stellt sich als extrem hilfsbereit, empathisch und moralisch überlegen dar</td>
-                        <td>Übertriebenes Engagement für gute Zwecke (mit Fokus auf eigener Anerkennung), moralische Überlegenheit betonen, andere für mangelndes Engagement kritisieren</td>
-                        <td>Bewunderung durch scheinbare Selbstlosigkeit und moralische Überlegenheit erlangen</td>
-                    </tr>
-                     <tr>
-                        <td><strong>Maligner (bösartiger) Narzissmus</strong> <br>(Keine offizielle DSM-Diagnose, aber klinisch relevanter Begriff)</td>
-                        <td>Kombination aus Narzissmus, antisozialem Verhalten, Aggression und Paranoia</td>
-                        <td>Gezielte Manipulation, Sadismus, Rachsucht, Ausbeutung ohne Reue, chronisches Lügen, paranoide Vorstellungen</td>
-                        <td>Macht und Kontrolle um jeden Preis, Zerstörung anderer zur eigenen Erhöhung</td>
-                    </tr>
-                </tbody>
-            </table>
-            <p>Diese Formen sind nicht immer klar getrennt; Überschneidungen und Mischformen sind häufig.</p>
-        </div>
-        <div class="quote-box">
-            "Der grandiose Narzisst baut sich ein Podest, der vulnerable gräbt sich eine Grube – beide tun es, um sich über andere zu stellen."
-            <cite>Angelehnt an diverse psychologische Beschreibungen</cite>
-        </div>
-
-         <hr class="glitch-line section-divider">
-
-        <h2 id="ursachen" class="glitch-text" data-text="Ursachen & Entwicklung">Ursachen & Entwicklung</h2>
-        <p>
-            Die Entstehung narzisstischer Züge oder einer NPS ist <strong class="highlight-text">multifaktoriell</strong>. Es gibt nicht die eine Ursache, sondern ein komplexes Zusammenspiel verschiedener Einflüsse:
-        </p>
-        <div class="flex-container">
-            <div class="data-box glitch-hover">
-                <h4>Genetische & Biologische Faktoren</h4>
-                <ul>
-                    <li><strong>Erblichkeit:</strong> Studien deuten auf eine signifikante genetische Komponente hin (Schätzungen variieren, oft um 40-60%).</li>
-                    <li><strong>Neurobiologie:</strong> Forschung zeigt mögliche Unterschiede in Gehirnregionen, die für Empathie, Emotionsregulation und Selbstwahrnehmung zuständig sind (z.B. anteriore Insula, präfrontaler Kortex).</li>
-                    <li><strong>Temperament:</strong> Bestimmte angeborene Temperamentsmerkmale (z.B. hohe Reaktivität, geringe Frustrationstoleranz) könnten die Entwicklung begünstigen.</li>
-                </ul>
-            </div>
-            <div class="data-box glitch-hover">
-                <h4>Umwelt- & Entwicklungsfaktoren</h4>
-                <ul>
-                    <li><strong>Frühe Beziehungserfahrungen:</strong>
-                        <ul>
-                            <li>Übermäßige Idealisierung durch Eltern (<span class="highlight-text">"Goldenes Kind"</span>) ohne realistische Grenzen.</li>
-                            <li>Emotionale Kälte, Vernachlässigung oder Abwertung, die kompensiert werden muss.</li>
-                            <li>Inkonsistentes Erziehungsverhalten (Wechsel zwischen Idealisierung und Abwertung).</li>
-                            <li>Instrumentalisierung des Kindes für die Bedürfnisse der Eltern.</li>
-                        </ul>
-                    </li>
-                     <li><strong>Trauma:</strong> Frühe traumatische Erlebnisse können zur Entwicklung rigider Abwehrmechanismen beitragen.</li>
-                    <li><strong>Soziokulturelle Einflüsse:</strong> Gesellschaften, die übermäßig Individualismus, Ruhm und materiellen Erfolg betonen, können narzisstische Tendenzen fördern.</li>
-                </ul>
-            </div>
-        </div>
-        <p>
-            Ein zentrales Modell besagt, dass narzisstische Merkmale oft als <strong class="highlight-text">Bewältigungsstrategie oder Abwehrmechanismus</strong> dienen, um mit tiefliegenden Gefühlen von Wertlosigkeit, Scham oder Angst umzugehen. Das grandiose Selbstbild schützt vor der Konfrontation mit diesen schmerzhaften Emotionen.
-        </p>
-
-         <hr class="glitch-line section-divider">
-
-        <h2 id="umgang" class="glitch-text" data-text="Umgang mit Narzissmus">Umgang mit Narzissmus</h2>
-        <p>
-            Die Interaktion mit Menschen mit ausgeprägten narzisstischen Zügen kann emotional sehr belastend sein. Es ist wichtig, Strategien zum Selbstschutz zu entwickeln.
-        </p>
-        <div class="data-box">
-            <h4>Strategien für den Umgang</h4>
-            <ol>
-                <li><strong>Grenzen setzen (und durchsetzen!):</strong> Definieren Sie klar, welches Verhalten Sie akzeptieren und welches nicht. Seien Sie konsequent in der Einhaltung dieser Grenzen, auch wenn es Widerstand gibt. Sagen Sie klar "Nein".</li>
-                <li><strong>Emotionale Distanz wahren ("Grauer Fels"):</strong> Vermeiden Sie emotionale Reaktionen auf Provokationen oder Abwertungen. Bleiben Sie sachlich und geben Sie wenig Angriffsfläche. Narzisstische Personen "nähren" sich oft von starken emotionalen Reaktionen.</li>
-                <li><strong>Realitätsprüfung betreiben:</strong> Vertrauen Sie Ihrer eigenen Wahrnehmung. Führen Sie ggf. Tagebuch über Ereignisse und Gespräche, um Gaslighting entgegenzuwirken. Sprechen Sie mit vertrauenswürdigen Dritten.</li>
-                <li><strong>Erwartungsmanagement:</strong> Hoffen Sie nicht auf tiefgreifende Einsicht, Empathie oder aufrichtige Entschuldigungen. Akzeptieren Sie die (oft begrenzten) Möglichkeiten der Person.</li>
-                <li><strong>Fokus auf eigenes Wohlbefinden:</strong> Investieren Sie Energie in Ihre eigene Selbstfürsorge, Hobbies, soziale Kontakte und Ihr Selbstwertgefühl außerhalb dieser Beziehung.</li>
-                <li><strong>Konfrontation vermeiden (wenn nicht nötig):</strong> Direkte Kritik oder Konfrontation führt oft zu narzisstischer Wut oder Abwehr. Wählen Sie Ihre Kämpfe weise. Fokus auf Verhaltensänderung statt Charakterkritik.</li>
-                <li><strong>Professionelle Hilfe suchen:</strong> Wenn Sie unter der Beziehung leiden, suchen Sie Unterstützung durch Therapeuten oder Beratungsstellen. In manchen Fällen ist auch die Trennung der gesündeste Weg.</li>
-            </ol>
-        </div>
-        <div class="important-note">
-            <strong>Wichtiger Hinweis:</strong> Diese Strategien dienen dem Selbstschutz im Umgang. Sie ersetzen keine Therapie für die narzisstische Person und garantieren keine Veränderung deren Verhaltens. Ihr eigenes Wohlbefinden hat Priorität!
-        </div>
-        <div class="data-box">
-            <h4>Der narzisstische Beziehungszyklus</h4>
-             <p>Viele Beziehungen mit narzisstischen Personen folgen einem Muster:</p>
-             <ol>
-                 <li><strong>Idealisierung ("Love Bombing"):</strong> Übermäßige Aufmerksamkeit, Komplimente, Geschenke, schnelle Intimität. Sie fühlen sich wie die wichtigste Person der Welt.</li>
-                 <li><strong>Abwertung ("Devaluation"):</strong> Subtile Kritik, Schuldzuweisungen, emotionale Kälte, Ignorieren, Vergleich mit anderen. Die Idealisierung schlägt ins Gegenteil um.</li>
-                 <li><strong>Verwerfen ("Discard"):</strong> Plötzliche Trennung, oft ohne Erklärung oder mit Schuldzuweisung an Sie, sobald Sie nicht mehr den "Nutzen" erfüllen oder die narzisstische Zufuhr liefern.</li>
-                 <li><strong>Zurückholen ("Hoovering"):</strong> Versuche, Sie nach dem Verwerfen wieder in die Beziehung zu ziehen (oft mit Versprechungen, Charme oder gespielter Reue), um den Zyklus neu zu starten.</li>
-             </ol>
-             <p>Das Erkennen dieses Zyklus ist ein wichtiger Schritt zur Befreiung.</p>
-        </div>
-
-         <hr class="glitch-line section-divider">
-
-         <h2 id="behandlung" class="glitch-text" data-text="Therapie & Behandlung">Therapie & Behandlung</h2>
-         <p>
-             Die Behandlung einer Narzisstischen Persönlichkeitsstörung ist herausfordernd, da Betroffene oft wenig Krankheitseinsicht zeigen und selten von sich aus Hilfe suchen. Wenn eine Therapie begonnen wird, zielt sie darauf ab:
-         </p>
-         <ul>
-             <li>Ein <strong class="highlight-text">stabileres und realistischeres Selbstbild</strong> zu entwickeln.</li>
-             <li>Die Fähigkeit zur <strong class="highlight-text">Empathie</strong> und zum Verständnis anderer Perspektiven zu verbessern.</li>
-             <li> dysfunktionale Denkmuster und Verhaltensweisen zu erkennen und zu modifizieren.</li>
-             <li> Bessere Strategien zur <strong class="highlight-text">Emotionsregulation</strong> zu erlernen (Umgang mit Kränkung, Wut, Scham).</li>
-             <li>Gesündere zwischenmenschliche Beziehungen aufzubauen.</li>
-         </ul>
-         <div class="data-box">
-            <h4>Therapeutische Ansätze</h4>
-             <p>Effektive Ansätze können sein:</p>
-             <ul>
-                 <li><strong>Psychodynamische Psychotherapie:</strong> Untersucht unbewusste Konflikte und frühe Beziehungserfahrungen, die zur Entwicklung der Störung beigetragen haben.</li>
-                 <li><strong>Schematherapie:</strong> Fokussiert auf die Veränderung tief verwurzelter maladaptiver Schemata (Lebensmuster), die das narzisstische Verhalten antreiben.</li>
-                 <li><strong>Kognitive Verhaltenstherapie (KVT):</strong> Hilft bei der Identifizierung und Veränderung dysfunktionaler Gedanken und Verhaltensmuster.</li>
-                 <li><strong>Mentalisierungsbasierte Therapie (MBT):</strong> Fördert die Fähigkeit, eigene und fremde mentale Zustände (Gedanken, Gefühle, Absichten) besser zu verstehen.</li>
-                 <li><strong>Gruppentherapie:</strong> Kann helfen, soziale Fähigkeiten zu verbessern und Feedback von anderen zu erhalten.</li>
-             </ul>
-             <p>Eine Behandlung ist oft langwierig und erfordert eine hohe Motivation des Klienten. Die Behandlung von Begleiterkrankungen (z.B. Depression) ist ebenfalls wichtig.</p>
-        </div>
-
-        <hr class="glitch-line section-divider">
-
-        <h2 id="ressourcen" class="glitch-text" data-text="Weiterführende Ressourcen">Weiterführende Ressourcen</h2>
-        <p>Vertiefen Sie Ihr Verständnis mit diesen zusätzlichen Quellen:</p>
-        <div class="data-box">
-            <h4>Empfohlene Bücher & Artikel</h4>
-            <ul class="link-list">
-                <li>Bärbel Wardetzki: "Weiblicher Narzissmus: Der Hunger nach Anerkennung"</li>
-                <li>Otto Kernberg: "Borderline-Störungen und pathologischer Narzissmus" (Fachliteratur)</li>
-                <li>Heinz-Peter Röhr: "Narzissmus – Das innere Gefängnis"</li>
-                <li>Artikel über Narzissmus auf <a href="https://www.psycom.net/narcissistic-personality-disorder" target="_blank" rel="noopener noreferrer">Psycom.net</a> (Englisch)</li>
-                <li>Informationen der <a href="https://www.neurologen-und-psychiater-im-netz.org/psychiatrie-psychosomatik-psychotherapie/stoerungen-erkrankungen/narzisstische-persoenlichkeitsstoerung/" target="_blank" rel="noopener noreferrer">Neurologen und Psychiater im Netz</a></li>
-            </ul>
-        </div>
-         <div class="data-box">
-            <h4>Zugang zu spezialisierten Inhalten</h4>
+        <section id="definition" class="content-section">
+            <h3 class="glitch-text" data-text="Was ist Narzissmus?">Was ist Narzissmus?</h3>
             <p>
-                Registrierte Benutzer mit entsprechenden Rollen erhalten Zugang zu detaillierten Fallstudien, Analysen spezifischer Manipulationstechniken (wie Love Bombing, Future Faking) und Selbsthilfe-Materialien.
+                Narzissmus beschreibt ein Persönlichkeitsmerkmal, das durch ein übersteigertes Gefühl der eigenen Wichtigkeit, ein tiefes Bedürfnis nach übermäßiger Aufmerksamkeit und Bewunderung, gestörte Beziehungen und einen Mangel an Empathie für andere gekennzeichnet ist. Hinter dieser Maske der extremen Zuversicht verbirgt sich jedoch oft ein fragiles Selbstwertgefühl, das anfällig für die geringste Kritik ist.
             </p>
-            <a href="account.html" class="button">Zum Account / Login</a>
-            <a href="andi-content.html" class="button button-secondary">[Beispiel: Andi's Bereich]</a>
+            <p>
+                Die <strong class="highlight-text">Narzisstische Persönlichkeitsstörung (NPS)</strong> ist eine spezifische, im DSM-5 (Diagnostisches und Statistisches Manual Psychischer Störungen) definierte psychische Störung. Sie repräsentiert das pathologische Ende des Narzissmus-Spektrums.
+            </p>
+            <h4>Kernmerkmale der NPS (nach DSM-5, vereinfacht):</h4>
+            <ul>
+                <li>Grandioses Gefühl der eigenen Wichtigkeit (übertreibt Leistungen und Talente).</li>
+                <li>Starke Eingenommenheit von Fantasien über unbegrenzten Erfolg, Macht, Glanz, Schönheit oder ideale Liebe.</li>
+                <li>Glaube an die eigene Besonderheit und Einzigartigkeit; kann nur von anderen besonderen oder hochrangigen Menschen (oder Institutionen) verstanden werden oder sollte nur mit diesen verkehren.</li>
+                <li>Verlangt nach übermäßiger Bewunderung.</li>
+                <li>Anspruchsdenken (unrealistische Erwartungen an eine besonders bevorzugte Behandlung oder automatisches Eingehen auf die eigenen Erwartungen).</li>
+                <li>Ausbeuterisches Verhalten in zwischenmenschlichen Beziehungen (nutzt andere aus, um eigene Ziele zu erreichen).</li>
+                <li>Mangel an Empathie: Ist nicht willens oder fähig, die Gefühle und Bedürfnisse anderer zu erkennen oder sich mit ihnen zu identifizieren.</li>
+                <li>Ist häufig neidisch auf andere oder glaubt, andere seien neidisch auf ihn/sie.</li>
+                <li>Zeigt arrogantes, überhebliches Verhalten oder Haltungen.</li>
+            </ul>
+            <div class="warning-box">
+                <h4>Wichtiger Hinweis</h4>
+                <p>Diese Informationen dienen der Aufklärung und ersetzen keine professionelle Diagnose. Nicht jeder Mensch mit narzisstischen Zügen hat eine NPS. Eine Diagnose sollte nur von qualifizierten Fachleuten gestellt werden.</p>
+            </div>
+        </section>
+
+        <section id="spektrum" class="content-section">
+            <h3 class="glitch-text" data-text="Das Narzissmus-Spektrum">Das Narzissmus-Spektrum</h3>
+            <p>
+                Narzissmus existiert auf einem Spektrum, von gesunden narzisstischen Zügen (wie Selbstvertrauen und Ehrgeiz) bis hin zu schweren pathologischen Ausprägungen. Man unterscheidet häufig zwischen zwei Haupttypen:
+            </p>
+            <div class="flex-container">
+                <div class="data-box flex-item">
+                    <h4>Grandioser (offener) Narzissmus</h4>
+                    <ul>
+                        <li>Extrovertiert, dominant, überheblich</li>
+                        <li>Offene Suche nach Bewunderung</li>
+                        <li>Ausbeuterisch, anspruchsvoll</li>
+                        <li>Geringe Angst, hohes Selbstwertgefühl (oft oberflächlich)</li>
+                        <li>Neigt zu Wutausbrüchen bei Kritik ("narzisstische Wut")</li>
+                    </ul>
+                </div>
+                <div class="data-box flex-item">
+                    <h4>Vulnerabler (verdeckter) Narzissmus</h4>
+                    <ul>
+                        <li>Introvertiert, überempfindlich, ängstlich</li>
+                        <li>Versteckte Grandiositätsfantasien</li>
+                        <li>Neidisch, schamempfindlich</li>
+                        <li>Hohe Neurotizismus-Werte, niedriges Selbstwertgefühl</li>
+                        <li>Fühlt sich oft missverstanden oder als Opfer</li>
+                    </ul>
+                </div>
+            </div>
+            <p>
+                Es ist wichtig zu verstehen, dass Individuen Merkmale beider Typen aufweisen können und die Ausprägungen variieren.
+            </p>
+        </section>
+
+        <section id="umgang" class="content-section">
+            <h3 class="glitch-text" data-text="Auswirkungen & Umgang">Auswirkungen & Umgang</h3>
+            <p>
+                Der Umgang mit Menschen mit stark ausgeprägten narzisstischen Zügen kann herausfordernd und emotional belastend sein. Typische Dynamiken umfassen:
+            </p>
+            <ul>
+                <li><strong>Idealisierung und Abwertung:</strong> Anfangs werden Partner oder Freunde oft idealisiert, später bei Nichterfüllung der Erwartungen stark abgewertet.</li>
+                <li><strong>Manipulation und Kontrolle:</strong> Techniken wie Gaslighting (Verdrehen der Realität), Schuldzuweisungen und emotionale Erpressung können eingesetzt werden.</li>
+                <li><strong>Mangelnde Empathie:</strong> Schwierigkeiten, die Perspektive oder Gefühle anderer nachzuvollziehen, führen oft zu Konflikten und Verletzungen.</li>
+                <li><strong>Grenzüberschreitungen:</strong> Persönliche Grenzen werden oft ignoriert oder bewusst überschritten.</li>
+            </ul>
+            <h4>Strategien im Umgang:</h4>
+            <ul>
+                <li><strong>Grenzen setzen und wahren:</strong> Klare Kommunikation darüber, welches Verhalten akzeptabel ist und welches nicht. Konsequenzen bei Überschreitungen sind entscheidend.</li>
+                <li><strong>Emotionale Distanz wahren ("Grauer Fels"):</strong> Reduzieren Sie emotionale Reaktionen auf Provokationen. Geben Sie möglichst wenig Angriffsfläche.</li>
+                <li><strong>Realitätsprüfung:</strong> Sprechen Sie mit vertrauenswürdigen Freunden, Familie oder Therapeuten, um die eigene Wahrnehmung zu validieren, besonders bei Gaslighting.</li>
+                <li><strong>Fokus auf eigenes Wohlbefinden:</strong> Priorisieren Sie Ihre eigene psychische und physische Gesundheit. Suchen Sie Unterstützung.</li>
+                <li><strong>Akzeptanz der Grenzen:</strong> Erkennen Sie an, dass Sie das Verhalten der anderen Person wahrscheinlich nicht grundlegend ändern können.</li>
+            </ul>
+             <a href="andi-content.html#strategien" class="button button-secondary">Vertiefende Strategien (Zugang erforderlich)</a>
+        </section>
+
+        <div class="cta-box">
+            <h3 class="glitch-text" data-text="Weitere Ressourcen">Weitere Ressourcen</h3>
+            <p>Für detailliertere Analysen, Fallstudien und therapeutische Ansätze, besuchen Sie bitte unsere geschützten Bereiche.</p>
+            <a href="account.html" class="button">Zu den Zugangsbereichen</a>
         </div>
 
     </main>
 
     <footer>
-        <p>© 2024 deepdive.Jette - Decode the patterns.</p>
+        <p>© 2025 deepdive.Jette - Decode the patterns.</p>
     </footer>
 
     <!-- Netlify Identity Widget Script -->

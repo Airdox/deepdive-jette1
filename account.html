@@ -3,15 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zugangsbereiche - deepdive.Jette</title>
+    <title>Account & Zugangsbereiche - deepdive.Jette</title>
     <link rel="stylesheet" href="css/style.css">
     <!-- Netlify-Redirect-Simulator einbinden -->
     <script src="js/netlify-redirect-simulator.js"></script>
     <style>
-        /* Zusätzliche Stile für die Account-Seite (Stil 3)*/
-         #user-info, #content-link {
-            min-height: 100px; /* Platzhalter Höhe */
-         }
+        .access-level-card {
+            background-color: var(--bg-dark);
+            padding: 1.8rem;
+            border-radius: 4px;
+            border-left: 5px solid var(--accent-green);
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+        .access-level-card h3 {
+            margin-top: 0;
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+        }
+        .access-level-card ul {
+            list-style: none; /* Entferne Standard-Aufzählungszeichen */
+            padding-left: 0;
+        }
+        .access-level-card li {
+            position: relative;
+            padding-left: 25px; /* Platz für das benutzerdefinierte Zeichen */
+            margin-bottom: 0.8rem;
+            line-height: 1.6;
+        }
+        .access-level-card li::before {
+            content: '\2714'; /* Häkchen */
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: var(--accent-green);
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+        .login-prompt {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 2rem;
+            border-top: 1px solid var(--border-color);
+        }
     </style>
 </head>
 <body>
@@ -29,140 +63,75 @@
     </header>
 
     <main>
-        <h2 class="glitch-text" data-text="Systemzugang">Systemzugang</h2>
+        <h2 class="glitch-text" data-text="Zugangsbereiche & Rollen">Zugangsbereiche & Rollen</h2>
+        <p>
+            Willkommen im Account-Bereich von deepdive.Jette. Hier erhalten Sie einen Überblick über die verschiedenen Zugangsstufen und die damit verbundenen Inhalte. Um auf geschützte Ressourcen zugreifen zu können, ist eine Registrierung und Anmeldung erforderlich.
+        </p>
 
-        <!-- Benutzerinfo-Bereich, wird dynamisch befüllt -->
-        <div id="user-info">
-            <div class="account-info">
-                <p>Initialisiere Benutzerdaten...</p>
-                </div>
-        </div>
+        <section class="access-levels">
+            <h3>Verfügbare Rollen & Inhalte:</h3>
 
-        <!-- Content-Link-Bereich, wird dynamisch befüllt -->
-        <div id="content-link">
-             <!-- Wird per JS befüllt -->
-        </div>
-
-        <div class="data-box profile-section glitch-hover">
-            <h4 class="glitch-text" data-text="Info: Personalisierte Zugangsebenen">Info: Personalisierte Zugangsebenen</h4>
-            <p>
-                deepdive.Jette nutzt rollenbasierte Zugangsbereiche (<strong class="highlight-text">Access Levels</strong>), um spezialisierte Materialien bereitzustellen.
-                Nach erfolgreicher Authentifizierung prüft das System Ihre Rolle und leitet Sie zu den für Sie freigegebenen Inhalten weiter.
-            </p>
-            <p>
-                Diese Inhalte umfassen:
+            <div class="access-level-card glitch-hover">
+                <h3>Basis-Zugang (Standard nach Registrierung)</h3>
                 <ul>
-                    <li>Vertiefende Fallstudien zu spezifischen narzisstischen Dynamiken (z.B. narzisstischer Missbrauch am Arbeitsplatz, Eltern-Kind-Beziehungen).</li>
-                    <li>Analyse komplexer Manipulationstaktiken (Gaslighting, Flying Monkeys, Silent Treatment etc.).</li>
-                    <li>Wissenschaftliche Artikel und Forschungszusammenfassungen.</li>
-                    <li>Ressourcen zu Therapieansätzen und Selbsthilfestrategien für Betroffene und Angehörige.</li>
-                    <li>Zugang zu geschützten Diskussionsforen (falls implementiert).</li>
+                    <li>Zugriff auf öffentliche Seiten (Startseite, Info)</li>
+                    <li>Möglichkeit zur Teilnahme an allgemeinen Diskussionen (falls implementiert)</li>
+                    <li>Grundlegende Account-Verwaltung</li>
                 </ul>
-                 Bei Fragen zur Rollenzuweisung wenden Sie sich bitte an den Systemadministrator.
-            </p>
-        </div>
+                <p>Ideal für den Einstieg und allgemeine Informationen.</p>
+            </div>
+
+            <div class="access-level-card glitch-hover">
+                <h3>Rolle: "andi"</h3>
+                <ul>
+                    <li>Alle Basis-Zugänge</li>
+                    <li>Zugriff auf den <a href="andi-content.html">Andi-Content-Bereich</a></li>
+                    <li>Download spezifischer Leitfäden (z.B. "Umgang mit NPS im Beruf")</li>
+                    <li>Zugriff auf vertiefende Fallstudien und Strategien</li>
+                </ul>
+                <p>Fokussiert auf professionelle Kontexte und fortgeschrittene Strategien.</p>
+            </div>
+
+            <div class="access-level-card glitch-hover">
+                <h3>Rolle: "ricardo"</h3>
+                <ul>
+                    <li>Alle Basis-Zugänge</li>
+                    <li>Zugriff auf den <a href="ricardo-content.html">Ricardo-Content-Bereich</a></li>
+                    <li>Download spezifischer Materialien (z.B. "Therapeutische Ansätze")</li>
+                    <li>Zugriff auf Forschungsergebnisse und Fachartikel</li>
+                </ul>
+                <p>Ausgerichtet auf therapeutische und wissenschaftliche Perspektiven.</p>
+            </div>
+
+             <div class="access-level-card glitch-hover">
+                <h3>Weitere Rollen (enjo, mareen, micha, sonstwer)</h3>
+                <ul>
+                    <li>Alle Basis-Zugänge</li>
+                    <li>Zugriff auf spezifische Download-Dateien, die ihrer Rolle zugeordnet sind.</li>
+                    <li>Kein Zugriff auf die speziellen Content-Seiten von "andi" oder "ricardo".</li>
+                </ul>
+                <p>Diese Rollen dienen primär dem Testen spezifischer Download-Berechtigungen.</p>
+            </div>
+        </section>
+
+        <section class="login-prompt">
+            <h3 class="glitch-text" data-text="Jetzt Anmelden oder Registrieren">Jetzt Anmelden oder Registrieren</h3>
+            <p>Loggen Sie sich ein, um auf Ihre spezifischen Inhalte zuzugreifen, oder registrieren Sie sich, um Teil der Community zu werden.</p>
+            <!-- Netlify Identity Buttons werden hier oft platziert oder über das Widget gesteuert -->
+            <div data-netlify-identity-button></div>
+             <a href="#" onclick="netlifyIdentity.open('login'); return false;" class="button">Systemzugriff [Login]</a>
+            <a href="#" onclick="netlifyIdentity.open('signup'); return false;" class="button button-secondary">Registrierung [Init]</a>
+        </section>
+
     </main>
 
     <footer>
-        <p>© 2024 deepdive.Jette - Decode the patterns.</p>
+        <p>© 2025 deepdive.Jette - Decode the patterns.</p>
     </footer>
 
     <!-- Netlify Identity Widget Script -->
     <script type="text/javascript" src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
     <!-- Unser Redirect-Script -->
     <script src="js/identity-redirect.js"></script>
-    <script>
-        // Wenn das DOM geladen ist
-        document.addEventListener('DOMContentLoaded', function() {
-            // Benutzerinfo-Bereich aktualisieren
-            const userInfoDiv = document.getElementById('user-info');
-            const contentLinkDiv = document.getElementById('content-link');
-
-            const displayUserInfo = (user) => {
-                const email = user.email;
-                let roles = [];
-
-                // Benutzerrollen abrufen, falls vorhanden
-                if (user.app_metadata && user.app_metadata.roles) {
-                    roles = user.app_metadata.roles;
-                }
-
-                // HTML für Benutzerinfo erstellen
-                userInfoDiv.innerHTML = `
-                    <div class="account-info">
-                        <h3>Willkommen zurück!</h3>
-                        <p><strong>USER_ID:</strong> ${email}</p>
-                        <p><strong>ACCESS_LEVEL(S):</strong> ${roles.length > 0 ? roles.map(role => `<span class="role-badge">${role}</span>`).join(' ') : '<span>STANDARD_ACCESS</span>'}</p>
-                    </div>
-                `;
-
-                // Content-Link basierend auf Rolle
-                if (roles.length > 0) {
-                    const role = roles[0]; // Erste Rolle für Weiterleitung verwenden
-                    const roleCapitalized = role.charAt(0).toUpperCase() + role.slice(1);
-                     contentLinkDiv.innerHTML = `
-                        <div class="data-box content-links glitch-hover">
-                            <h4 class="glitch-text" data-text="Persönlicher Inhaltsbereich">Persönlicher Inhaltsbereich</h4>
-                            <p>Zugriff auf Ihren spezifischen Bereich <strong class="highlight-text">[${roleCapitalized}]</strong> gewährt. Klicken Sie, um fortzufahren.</p>
-                            <a href="/${role}-content.html" class="button">Öffne ${roleCapitalized}-Sektor</a>
-                        </div>
-                    `;
-                 } else {
-                    contentLinkDiv.innerHTML = `
-                        <div class="data-box content-links">
-                            <h4>Standard-Zugriffsebene</h4>
-                            <p>Ihrem Konto sind keine spezifischen Inhaltsbereiche zugewiesen. Sie haben Zugriff auf die öffentlichen Bereiche.</p>
-                            <p>Kontaktieren Sie den Administrator, falls Sie erweiterten Zugriff benötigen.</p>
-                         </div>
-                    `;
-                }
-             };
-
-            const displayLoginPrompt = () => {
-                userInfoDiv.innerHTML = `
-                    <div class="login-prompt">
-                        <h3 class="glitch-text" data-text="Authentifizierung erforderlich">Authentifizierung erforderlich</h3>
-                        <p>Loggen Sie sich ein, um auf personalisierte Inhalte und Funktionen zuzugreifen.</p>
-                        <button class="button login-button" onclick="netlifyIdentity.open('login');">Login [Ausführen]</button>
-                        <button class="button button-secondary" onclick="netlifyIdentity.open('signup');">Registrierung [Neu]</button>
-                    </div>
-                `;
-                contentLinkDiv.innerHTML = ''; // Leeren, da kein Benutzer angemeldet ist
-            };
-
-            // Event Listener für Login und Logout
-             netlifyIdentity.on('login', user => {
-                console.log('Login event detected', user);
-                displayUserInfo(user);
-                // Automatische Weiterleitung wird durch identity-redirect.js gehandhabt
-            });
-
-            netlifyIdentity.on('logout', () => {
-                console.log('Logout event detected');
-                displayLoginPrompt();
-                // Zurück zur Account-Seite, falls man auf einer geschützten Seite war
-                 if (!window.location.pathname.includes('account.html')) {
-                   // Optional: Weiterleitung zur account.html oder Startseite nach Logout
-                   // window.location.href = '/account.html';
-                 }
-            });
-
-            netlifyIdentity.on('init', user => {
-                 console.log('Identity init', user);
-                 if (user) {
-                     displayUserInfo(user);
-                 } else {
-                     displayLoginPrompt();
-                 }
-             });
-
-             netlifyIdentity.on('error', err => {
-                console.error('Netlify Identity Error:', err);
-                // Zeige Fehlermeldung dem User?
-            });
-
-
-        });
-    </script>
 </body>
 </html>
